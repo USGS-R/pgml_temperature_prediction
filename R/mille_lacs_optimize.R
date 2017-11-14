@@ -6,14 +6,16 @@ library(tools)
 ptm <- proc.time()
 
 #########################################
-.libPaths('/lustre/projects/water/owi/booth-lakes/rLibs')
+libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
 nhdID <- "nhd_2360642"
 wbicID <- "DOW_48000200"
 param_df <- read.csv('param_df_02.csv')
 obs_file <- 'obs_filt.tsv'
-
+base_nml_file <- 'nml/glm2_mille_lacs.nml'
 ############################
-
+if(grepl(x = Sys.info()["nodename"], pattern = "cr.usgs.gov")) { #are we on yeti?
+  .libPaths(libPath)
+}
 taskID <- as.numeric(Sys.getenv('SLURM_ARRAY_TASK_ID', unset=1)) #from yeti environment; set to 1 if doesnt exist (i.e. on a local VM)
 
 #see if an argument was passed in to offset the taskID
@@ -50,7 +52,7 @@ baseNML <- set_nml(baseNML, 'out_dir', folderPath)
 
 write_nml(baseNML, file.path(folderPath,  "glm2.nml"))
 run_glm(sim_folder = folderPath)
-#do rmse
+#do rmse  #TODO: second compare to field for smaller training
 nc_file <- file.path(folderPath, 'output.nc')
 temp_rmse <- compare_to_field(nc_file, obs_file, 
                               metric = 'water.temperature', as_value = FALSE, 
