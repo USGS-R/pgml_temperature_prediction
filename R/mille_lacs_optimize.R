@@ -2,19 +2,22 @@ library(mda.lakes)
 library(glmtools)
 library(dplyr)
 library(tools)
+library(assertthat)
 # Start the clock!
 ptm <- proc.time()
 
 #########################################
 libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
-nhdID <- "nhd_2360642"
-wbicID <- "DOW_48000200"
+nhdID <- "nhd_13293262"
+stateID <- "WBIC_805400"
 param_df <- read.csv('param_df_02.csv')
-obs_file <- 'obs_filt.tsv'
-base_nml_file <- 'nml/glm2_mille_lacs.nml'
+obs_file <- 'obs/mille_lacs/obs_filt.tsv'
+base_nml_file <- 'nml/glm2_mendota.nml'
 ############################
+yeti=FALSE
 if(grepl(x = Sys.info()["nodename"], pattern = "cr.usgs.gov")) { #are we on yeti?
   .libPaths(libPath)
+  yeti=TRUE
 }
 taskID <- as.numeric(Sys.getenv('SLURM_ARRAY_TASK_ID', unset=1)) #from yeti environment; set to 1 if doesnt exist (i.e. on a local VM)
 
@@ -30,7 +33,7 @@ localScratch <- Sys.getenv('LOCAL_SCRATCH', unset="out") #write to diff director
 
 param_df_use <- param_df[taskID,]
 
-outFolder <- paste(wbicID, "optim", taskID, sep ="_")
+outFolder <- paste(stateID, "optim", taskID, sep ="_")
 #folderPath <- file.path("out2", outFolder)
 folderPath <- file.path(localScratch, outFolder)
 message(folderPath)
@@ -39,7 +42,7 @@ dir.create(folderPath, recursive = TRUE)
 #TODO: make reusable for different lakes - supply baseNML?
 #Could set more things here explicitly, since only using one lake most things won't change
 #might speed up populate_base_lake_nml?
-baseNML <- read_nml('glm2_mille_lacs.nml')
+baseNML <- read_nml(base_nml_file)
 baseNML <- set_nml(baseNML, 'cd', param_df_use$cd)
 baseNML <- set_nml(baseNML, 'Kw', param_df_use$kw)
 baseNML <- set_nml(baseNML, 'coef_mix_shear', param_df_use$coef_mix_shear)
@@ -49,6 +52,11 @@ baseNML <- set_nml(baseNML, 'dt', 3600)
 baseNML <- set_nml(baseNML, 'timezone', -6)
 baseNML <- set_nml(baseNML, 'nsave', 24)
 baseNML <- set_nml(baseNML, 'out_dir', folderPath)
+if(!yeti){
+  baseNML <- set_nml(baseNML, 'out_dir', '.')  #no 
+}
+#check that meteo file matches nhd id
+assert_that(grepl(x = get_nml_value(baseNML, arg_name = "meteo_fl"), pattern = nhdID))
 
 write_nml(baseNML, file.path(folderPath,  "glm2.nml"))
 run_glm(sim_folder = folderPath)
