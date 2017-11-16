@@ -1,5 +1,5 @@
 #separate out "training" data
-full_data <- read.table('obs/mendota/mendota_combined.tsv', sep = "\t")
+full_data <- read.table('obs/mendota/mendota_combined.tsv', sep = "\t", header = TRUE)
 library(dplyr)
 #just take middle 60%?  try splitting differently later
 cuts <- ceiling(quantile(1:nrow(full_data), c(0.2,0.8)))
