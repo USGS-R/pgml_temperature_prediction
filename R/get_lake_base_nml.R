@@ -8,4 +8,6 @@ meteo_file_path <- get_nml_value(nml, 'meteo_fl')
 new_meteo_path <- file.path("meteo", paste(nhd_id, 'driver.csv', sep = "_"))
 file.copy(from =meteo_file_path, to = new_meteo_path)
 nml <- set_nml(glm_nml = nml, arg_name = "meteo_fl", arg_val = file.path('../..', new_meteo_path))
+#be smart about setting max layers, to reduce amount of output
+
 write_nml(glm_nml = nml, file = "nml/glm2_mendota.nml")
