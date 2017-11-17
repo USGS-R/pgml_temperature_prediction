@@ -16,5 +16,5 @@ wqp <- anti_join(wqp, uw, by = c("DateTime", "depth"))
 
 all_data <- bind_rows(wqp, uw) %>% rename(Depth=depth, temp = wtemp)
 assert_that(anyDuplicated(all_data[,c("DateTime", "Depth")]) == 0)
-write.table(x = all_data, file = "obs/mendota/mendota_combined.tsv", sep = "\t",
+write.csv(x = all_data, file = "obs/mendota/mendota_combined.csv",
             row.names = FALSE)
