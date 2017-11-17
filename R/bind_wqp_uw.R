@@ -14,7 +14,7 @@ uw <- uw %>% rename(DateTime=sampledate)
 #keep UW measurements since more data from there
 wqp <- anti_join(wqp, uw, by = c("DateTime", "depth"))
 
-all_data <- bind_rows(wqp, uw) %>% rename(Depth=depth, temp = wtemp)
+all_data <- bind_rows(wqp, uw) %>% rename(Depth=depth, temp = wtemp) %>% filter(Depth < 26)
 assert_that(anyDuplicated(all_data[,c("DateTime", "Depth")]) == 0)
 write.csv(x = all_data, file = "obs/mendota/mendota_combined.csv",
             row.names = FALSE)
