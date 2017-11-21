@@ -1,2 +1,7 @@
 rlogs/*
 shellLog/*
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
