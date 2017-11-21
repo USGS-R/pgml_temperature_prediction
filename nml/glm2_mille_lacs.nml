@@ -1,6 +1,6 @@
 &glm_setup
    sim_name = 'GLMSimulation'
-   max_layers = 1000
+   max_layers = 68
    min_layer_vol = 0.5
    min_layer_thick = 0.2
    max_layer_thick = 1
@@ -24,10 +24,10 @@
 /
 &time
    timefmt = 2
-   start = '1980-04-01 00:00:00'
-   stop = '2016-10-01 00:00:00'
-   dt = 3600
-   timezone = -6
+   start = '2000-04-01 00:00:00'
+   stop = '2000-08-30 00:00:00'
+   dt = 86400
+   timezone = 7
 /
 &output
    out_dir = '.'
@@ -65,7 +65,7 @@
    albedo_mode = 1
    cloud_mode = 4
    subdaily = .false.
-   meteo_fl = '/lustre/projects/water/owi/booth-lakes/necsc-lake-modeling/nhd_2360642_driver.csv'
+   meteo_fl = '../../meteo/nhd_2360642_driver.csv'
    wind_factor = 1
    sw_factor = 1
    lw_factor = 1
