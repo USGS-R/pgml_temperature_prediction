@@ -1,16 +1,11 @@
 #remeber to load netcdf first when on yeti
 library(glmtools)
 library(dplyr)
-resample <- function() {
-t <- resample_to_field(nc_file="output.nc", field_file="../../pgml_temperature_prediction/obs/mille_lacs/obs_only.tsv",
+resample <- function(field_file, out_file) {
+t <- resample_to_field(nc_file="out/WBIC_805400_optim_1/output.nc", field_file="obs/mendota/mendota_combined.csv",
 			method="interp")
-t <- mutate(t, DateTime=as.Date(DateTime))
-meteo <- data.table::fread('../../pgml_temperature_prediction/meteo/nhd_13293262_driver.csv') %>% 
-	rename(DateTime=time) %>%
-	mutate(DateTime=as.Date(DateTime))
-#trim to model start/end dates to catch NAs
-with_meteo <- left_join(t, meteo, by = "DateTime") %>% filter(DateTime >= "1980-04-01" & DateTime <= "2016-01-01") %>%
-		filter(!is.na(Modeled_temp))
+t <- mutate(t, DateTime=as.Date(DateTime)) %>% select(Observed_temp, Modeled_temp, DateTime, Depth)
+write.csv(t, out_file, row.names = FALSE)
 return(with_meteo)
 }
 

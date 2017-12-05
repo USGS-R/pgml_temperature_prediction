@@ -42,23 +42,10 @@ dir.create(folderPath, recursive = TRUE)
 #TODO: make reusable for different lakes - supply baseNML?
 #Could set more things here explicitly, since only using one lake most things won't change
 #might speed up populate_base_lake_nml?
-baseNML <- read_nml(base_nml_file)
-baseNML <- set_nml(baseNML, 'cd', param_df_use$cd)
-baseNML <- set_nml(baseNML, 'Kw', param_df_use$kw)
-baseNML <- set_nml(baseNML, 'coef_mix_shear', param_df_use$coef_mix_shear)
-baseNML <- set_nml(baseNML, 'start', '1980-04-01 00:00:00')
-baseNML <- set_nml(baseNML, 'stop', '2016-10-01 00:00:00')
-baseNML <- set_nml(baseNML, 'dt', 3600)
-baseNML <- set_nml(baseNML, 'timezone', -6)
-baseNML <- set_nml(baseNML, 'nsave', 24)
-baseNML <- set_nml(baseNML, 'out_dir', folderPath)
-if(!yeti){
-  baseNML <- set_nml(baseNML, 'out_dir', '.')  #no 
-}
+
 #check that meteo file matches nhd id
 assert_that(grepl(x = get_nml_value(baseNML, arg_name = "meteo_fl"), pattern = nhdID))
 
-write_nml(baseNML, file.path(folderPath,  "glm2.nml"))
 run_glm(sim_folder = folderPath)
 
 message(paste("finished", taskID))

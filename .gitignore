@@ -4,4 +4,5 @@ shellLog/*
 .Rhistory
 .RData
 .Ruserdata
+out/*
 
