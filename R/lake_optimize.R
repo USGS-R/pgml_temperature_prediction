@@ -10,7 +10,7 @@ ptm <- proc.time()
 libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
 nhdID <- "nhd_13293262"
 stateID <- "WBIC_805400"
-param_df <- read.csv('param_df_02.csv')
+param_df <- read.csv('param_search/mendota_params.csv')
 obs_file <- 'obs/mendota/training.csv'
 base_nml_file <- 'nml/glm2_mendota.nml'
 ############################

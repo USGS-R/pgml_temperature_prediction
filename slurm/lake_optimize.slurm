@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=mendota_optim     # name that you chose
+#SBATCH --job-name=mendota2     # name that you chose
 #SBATCH -p UV              # the partition you want to use, for this case prod is best
 #SBATCH -A cida                 # your account
 #SBATCH -o shellLog/slurm-%A_%a.out
@@ -7,7 +7,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=wwatkins@usgs.gov
 #SBATCH --export=ALL
-#SBATCH --array=1-4261          # process IDs 
+#SBATCH --array=4-4261          # process IDs 
 #SBATCH -n 1
 offset_task_id=${1}
 echo $offset_task_id
@@ -26,7 +26,7 @@ fi
 #TODO: be smarter about lake id in file name  do we still need to write to local scratch with less output?
 module load tools/netcdf-4.3.2-gnu
 mkdir rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}
-R CMD BATCH --no-restore --no-save '--args 'offset_yes'' R/lake_optimize.R rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}/rlog.Rlog 
+R CMD BATCH --no-restore --no-save '--args '$1'' R/lake_optimize.R rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}/rlog.Rlog 
 	
 cp -r ${LOCAL_SCRATCH}/WBIC_805400_optim_"$task_id_adj" /lustre/projects/water/owi/booth-lakes/out
 sync
