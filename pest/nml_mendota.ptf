@@ -1,13 +1,14 @@
+ptf #
 &glm_setup
    sim_name = 'GLMSimulation'
    max_layers = 140
    min_layer_vol = 0.5
    min_layer_thick = 0.2
    max_layer_thick = 1.5
-   Kw = 0.457501
+   Kw = #kw        #
    coef_mix_conv = 0.2
    coef_wind_stir = 0.23
-   coef_mix_shear = 0.2
+   coef_mix_shear = #mxshr         #
    coef_mix_turb = 0.51
    coef_mix_KH = 0.3
    coef_mix_hyp = 0.5
@@ -65,7 +66,7 @@
    albedo_mode = 1
    cloud_mode = 4
    subdaily = .false.
-   meteo_fl = '../../meteo/nhd_13293262_driver.csv'
+   meteo_fl = '/lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/meteo/nhd_13293262_driver.csv'
    wind_factor = 1
    sw_factor = 1
    lw_factor = 1
@@ -74,7 +75,7 @@
    rain_factor = 1
    ce = 0.0013
    ch = 0.0014
-   cd = 0.001399997
+   cd = #cd          #
    rain_threshold = 0.01
    runoff_coef = 0.3
 /

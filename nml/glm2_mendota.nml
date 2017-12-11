@@ -65,7 +65,7 @@
    albedo_mode = 1
    cloud_mode = 4
    subdaily = .false.
-   meteo_fl = '../../meteo/nhd_13293262_driver.csv'
+   meteo_fl = '/lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/meteo/nhd_13293262_driver.csv'
    wind_factor = 1
    sw_factor = 1
    lw_factor = 1
