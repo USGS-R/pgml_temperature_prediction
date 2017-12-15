@@ -13,5 +13,5 @@ cp -r /lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/pest/* 
 module load tools/netcdf-4.3.2-gnu
 module load tools/pest-13.5-gnu
 pest mendota 
-mv ./* /lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/pest_local_scratch
+mv ./* /lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/pest_all_log
 

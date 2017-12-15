@@ -18,7 +18,7 @@ if(grepl(x = Sys.info()["nodename"], pattern = "cr.usgs.gov")) { #are we on yeti
 }
 
 #folderPath <- paste(stateID, "optim", taskID, sep ="_")
-folderPath <- "test"
+folderPath <- "glm_run"
 dir.create(folderPath, recursive = TRUE)
 
 #check that meteo file matches nhd id
@@ -26,5 +26,5 @@ dir.create(folderPath, recursive = TRUE)
 run_glm(sim_folder = folderPath)
 #TODO: rewrite output to ascii
 source('resample.R')
-resample(field_file = "/lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/obs/mendota/mendota_combined.csv", nc_file = "test/output.nc", out_file = "test/temp.csv")
+resample(field_file = "/lustre/projects/water/owi/booth-lakes/pgml_temperature_prediction/obs/mendota/mendota_combined.csv", nc_file = "glm_run/output.nc", out_file = "glm_run/temp.csv")
 message(paste("finished"))

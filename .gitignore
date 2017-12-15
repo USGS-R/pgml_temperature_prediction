@@ -5,4 +5,5 @@ shellLog/*
 .RData
 .Ruserdata
 out/*
+pest/pMaster_*
 
