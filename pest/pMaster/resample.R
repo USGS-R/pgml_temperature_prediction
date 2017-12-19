@@ -1,3 +1,4 @@
+
 #remeber to load netcdf first when on yeti
 library(glmtools)
 library(dplyr)
@@ -19,3 +20,4 @@ add_training_col <- function(df, starts, ends) {
 	}
 	return(df)
 }
+
