@@ -1,23 +1,24 @@
 pcf
 * control data
 restart estimation
-3 51559 1 0 1 
+3 51559 2 0 1 
 1 1 single point 
 10 -3  0.3 0.02 9  
 10 10 0.001
-0.1 noaui
-5 0.005 4 6 0.005 4 
-0 0 0 parsaveitn
+0.1 noaui boundscale
+50 0.005 7 4 0.005 4  
+0 0 0 
 * singular value decomposition
 2
 3 5e-7
 0
 * parameter groups
-kw relative 0.01000000 0.0001 switch 1.5 parabolic
+cd relative 0.05000000 0.00001 switch 1.5 parabolic
+fac relative 0.02000000 0.001 switch 1.5 parabolic
 * parameter data
-kw none factor 0.457501 .320250 0.594751 kw 1 0
-cd log factor 0.001399997 .000979997 .001819996 kw 1 0
-mxshr none factor 0.20000  .140000 .260000 kw 1 0
+cd log factor 0.001399997 .000979997 .001819996 cd 1 0 
+sw none factor 1 0.96000 1.04000 fac 1 0
+at none factor 1 0.96000 1.04000 fac 1 0
 * observation groups
 wtemp
 * observation data

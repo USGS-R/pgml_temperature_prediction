@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=ppest_mendota2     # name that you chose
+#SBATCH --job-name=ppest_mendota     # name that you chose
 #SBATCH -p UV              # the partition you want to use, options are normal, large (>240 cores), and UV
 #SBATCH -A cida                 # your account
 #SBATCH -o shellLog/slurm-%j.out
@@ -16,7 +16,7 @@ CASE_NAME="mendota"
 MASTER_TEMPLATE="pMaster"
 MASTER_DIR="${MASTER_TEMPLATE}_${SLURM_JOBID}"
 
-WORKER_TEMPLATE="pMaster"
+WORKER_TEMPLATE="${MASTER_TEMPLATE}"
 WORKER_DIR="${LOCAL_SCRATCH}/pWorker"
 
 # This command sets up the worker remote directories. It
