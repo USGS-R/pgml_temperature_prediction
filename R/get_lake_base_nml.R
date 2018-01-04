@@ -2,7 +2,8 @@
 #speed up mass model runs by not populating the base nml/downloading driver data repeatedly
 library(mda.lakes)
 library(glmtools)
-setup_nml <- function(nhd_id, nml_name) {
+setup_nml <- function(nhd_id, 
+                      nml_name=file.path('nml', paste("glm2",nhd_id, sep = "_"))) {
   nml <- populate_base_lake_nml(site_id = nhd_id)
   meteo_file_path <- get_nml_value(nml, 'meteo_fl')
   new_meteo_path <- file.path("meteo", paste(nhd_id, 'driver.csv', sep = "_"))
@@ -14,6 +15,7 @@ setup_nml <- function(nhd_id, nml_name) {
   max_layers <- ceiling(max_depth/min_thick * 1.1)
   nml <- set_nml(glm_nml = nml, arg_name = "max_layers", arg_val = max_layers)
   write_nml(glm_nml = nml, file = nml_name)
+  print(paste("Finished", nhd_id))
 }
 
 #create df of param search space
