@@ -6,4 +6,5 @@ shellLog/*
 .Ruserdata
 out/*
 pest/pMaster_*
+obs/raw/*
 
