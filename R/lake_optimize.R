@@ -11,7 +11,7 @@ libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
 nhdID <- "nhd_13293262"
 stateID <- "WBIC_805400"
 param_df <- read.csv('param_search/mendota_params.csv')
-obs_file <- 'obs/mendota/training.csv'
+obs_file <- 'obs/processed/nhd_13293262/mendota_combined.csv' 
 base_nml_file <- 'nml/glm2_mendota.nml'
 ############################
 yeti=FALSE
