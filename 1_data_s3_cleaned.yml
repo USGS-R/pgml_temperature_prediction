@@ -1,0 +1,24 @@
+file_extensions:
+  - ind
+
+sources:
+  - 1_data_s3_cleaned/src/parse_uw_files.R
+  
+include:
+  - 1_data_s3.yml
+ 
+targets:
+  all:
+    depends:
+      - 1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind
+      - 1_data_s3_cleaned/out/long_term_ntl.rds.ind
+      
+  1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind:
+    command: parse_mendota_daily_buoy()
+    depends:
+      - 1_data_s3/out/mendota_daily_buoy.csv.ind
+      
+  1_data_s3_cleaned/out/long_term_ntl.rds.ind:
+    command: parse_long_term_ntl()
+    depends:
+      - 1_data_s3/out/long_term_ntl.csv.ind

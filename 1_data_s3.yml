@@ -1,0 +1,51 @@
+packages:
+  - scipiper
+
+file_extensions:
+  - ind
+
+target_default: all
+
+targets:
+  all:  #this should be the final things
+    depends:
+    - lib/cfg/s3_config.yml
+    - 1_data_s3/out/long_term_ntl.csv.ind
+    - 1_data_s3/out/mendota_daily_buoy.csv.ind
+    - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018_explainer.txt.ind
+    - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind
+    - 1_data_s3/out/MN_fisheries_all_temp_data.txt.ind
+    - 1_data_s3/out/MPCA_temp_data_all_explainer.txt.ind
+    - 1_data_s3/out/MPCA_temp_data_all.tsv.ind
+    - 1_data_s3/out/URL_Temp_Logger_2006_to_2017_explainer.txt.ind
+    - 1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind
+  
+  lib/cfg/s3_config.yml:
+    command: s3_config(config_file=target_name, bucket = I('pgml-temperature-prediction'))
+
+  1_data_s3/out/long_term_ntl.csv.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/mendota_daily_buoy.csv.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018_explainer.txt.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/MN_fisheries_all_temp_data.txt.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/MPCA_temp_data_all_explainer.txt.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/MPCA_temp_data_all.tsv.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017_explainer.txt.ind:
+    command: s3_get(target_name)
+
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind:
+    command: s3_get(target_name)

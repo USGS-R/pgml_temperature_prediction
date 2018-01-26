@@ -1,0 +1,18 @@
+packages:
+  - scipiper
+
+file_extensions:
+  - ind
+
+target_default: all
+
+targets:
+  all:  #this should be the final things
+    depends:
+    {{#targets}}
+    - {{name}}
+    {{/targets}}
+  {{#targets}}
+  {{name}}:
+    command: {{command}}
+  {{/targets}}
