@@ -3,15 +3,22 @@ file_extensions:
 
 sources:
   - 1_data_s3_cleaned/src/parse_uw_files.R
+  - 1_data_s3_cleaned/src/parse_dow_files.R
   
 include:
   - 1_data_s3.yml
+  
+packages:
+  - dplyr
+  - scipiper
+  - assertthat
  
 targets:
   all:
     depends:
       - 1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind
       - 1_data_s3_cleaned/out/long_term_ntl.rds.ind
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind
       
   1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind:
     command: parse_mendota_daily_buoy()
@@ -22,3 +29,8 @@ targets:
     command: parse_long_term_ntl()
     depends:
       - 1_data_s3/out/long_term_ntl.csv.ind
+      
+  1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind:
+    command: parse_MPCA_temp_data_all()
+    depends:
+      - 1_data_s3/out/MPCA_temp_data_all.tsv.ind

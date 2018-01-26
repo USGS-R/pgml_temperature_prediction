@@ -4,10 +4,10 @@ packages:
 file_extensions:
   - ind
 
-target_default: all
+target_default: s3_get_all
 
 targets:
-  all:  #this should be the final things
+  s3_get_all:  #this should be the final things
     depends:
     - lib/cfg/s3_config.yml
     - 1_data_s3/out/long_term_ntl.csv.ind
