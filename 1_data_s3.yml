@@ -14,7 +14,6 @@ targets:
     - 1_data_s3/out/mendota_daily_buoy.csv.ind
     - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018_explainer.txt.ind
     - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind
-    - 1_data_s3/out/MN_fisheries_all_temp_data.txt.ind
     - 1_data_s3/out/MPCA_temp_data_all_explainer.txt.ind
     - 1_data_s3/out/MPCA_temp_data_all.tsv.ind
     - 1_data_s3/out/URL_Temp_Logger_2006_to_2017_explainer.txt.ind
@@ -33,9 +32,6 @@ targets:
     command: s3_get(target_name)
 
   1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind:
-    command: s3_get(target_name)
-
-  1_data_s3/out/MN_fisheries_all_temp_data.txt.ind:
     command: s3_get(target_name)
 
   1_data_s3/out/MPCA_temp_data_all_explainer.txt.ind:
