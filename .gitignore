@@ -9,4 +9,5 @@ pest/pMaster_*
 1_data_s3/out/*
 !/1_data_s3/out/*.ind
 *.rds
+!/lib/crosswalks/*
 
