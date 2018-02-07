@@ -1,0 +1,127 @@
+packages:
+  - scipiper
+  - dplyr
+  - yaml
+  - dataRetrieval
+  - assertthat
+  - glmtools
+
+file_extensions:
+  - ind
+
+sources:
+  - 3_assimilate_data/src/assimilate.R 
+
+target_default: all
+
+targets:
+  all:  #this should be the final things
+    depends:
+      - 3_assimilate_data/out/nhd_167122137.rds.ind
+      - 3_assimilate_data/out/nhd_120052238.rds.ind
+      - 3_assimilate_data/out/nhd_4817675.rds.ind
+      - 3_assimilate_data/out/nhd_4819397.rds.ind
+      #- 3_assimilate_data/out/nhd_4818479.rds.ind
+      - 3_assimilate_data/out/nhd_120052195.rds.ind
+      - 3_assimilate_data/out/nhd_2360642.rds.ind
+      - 3_assimilate_data/out/nhd_120052233.rds.ind
+      - 3_assimilate_data/out/nhd_120052889.rds.ind
+      - 3_assimilate_data/out/nhd_7142570.rds.ind
+      - 3_assimilate_data/out/nhd_120052896.rds.ind
+      - 3_assimilate_data/out/nhd_13293262.rds.ind
+  
+  3_assimilate_data/out/nhd_167122137.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_167122137"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('04003000')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_120052238.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_120052238"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('69084500')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_4817675.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_4817675"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('11020300','11020301')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_4819397.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_4819397"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('11020302')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_4818479.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_4818479"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('11020304')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_120052195.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_120052195"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('39000200')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_2360642.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_2360642"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('48000200')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_120052233.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_120052233"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('69069400')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_120052889.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_120052889"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('04003501')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_7142570.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_7142570"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('69037800','69037801','69037802')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_120052896.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_120052896"), files = I(c('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds','1_data_s3_cleaned/out/MPCA_temp_data_all.rds','1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds')), state_src = I("DOW"), state_id = I(c('11014700')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+      
+  3_assimilate_data/out/nhd_13293262.rds.ind:
+    command: assimilate_data(nhd_id = I("nhd_13293262"), files = I(c('1_data_s3_cleaned/out/long_term_ntl.rds','1_data_s3_cleaned/out/mendota_daily_buoy.rds')), state_src = I("UWID"), state_id = I(c('ME')))
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - 1_data_s3_cleaned/out/long_term_ntl.rds
+      - 1_data_s3_cleaned/out/mendota_daily_buoy.rds
+      
