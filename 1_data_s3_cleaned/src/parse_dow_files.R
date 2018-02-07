@@ -29,7 +29,7 @@ parse_URL_Temp_Logger_2006_to_2017 <- function(infile = "1_data_s3/out/URL_Temp_
                             Time = substr(as.character(Time), 10, 19)) %>% 
     filter(Time == "12:00:00") %>% 
     select(DateTime, Depth, temp, DOW) %>% arrange(DateTime)
-  saveRDS(object = clean, file = outfile)
+  saveRDS(object = df_clean, file = outfile)
   s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))
 }
 

@@ -19,8 +19,8 @@ targets:
       - 1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind
       - 1_data_s3_cleaned/out/long_term_ntl.rds.ind
       - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind
-      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind
       - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind
+      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind
       
   1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind:
     command: parse_mendota_daily_buoy()
