@@ -24,7 +24,8 @@ assimilate_data <- function(nhd_id, files, state_src, state_id) {
   wqp_data <- rename(wqp_data, DateTime = Date, temp = wtemp, 
                      Depth = depth)
   #deal with duplicates; keep the non-WQP value
-  site_data <- distinct(bind_rows(site_data, wqp_data))
+  site_data <- distinct(bind_rows(site_data, wqp_data), DateTime, Depth, 
+                        .keep_all = TRUE)
   assert_that(anyDuplicated(site_data) == 0)
   
   #get max depth for cleaning
