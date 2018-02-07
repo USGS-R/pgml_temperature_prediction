@@ -10,7 +10,7 @@ targets:
   all:  #this should be the final things
     depends:
     {{#targets}}
-    - {{name}}
+    - 1_data_wqp/out/{{.}}.rds.ind
     {{/targets}}
   {{#targets}}
   {{name}}:
