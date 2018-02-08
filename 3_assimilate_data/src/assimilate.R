@@ -26,7 +26,14 @@ assimilate_data <- function(nhd_id, files, state_src, state_id) {
   #deal with duplicates; keep the non-WQP value
   site_data <- distinct(bind_rows(site_data, wqp_data), DateTime, Depth, 
                         .keep_all = TRUE)
-  assert_that(anyDuplicated(site_data) == 0)
+  #TODO: WTF distinct is missing some?  manually remove what anyDuplicated catches?
+  #try a data.table function?
+  
+  while( anyDuplicated(site_data[c("DateTime", "Depth")]) != 0){
+    duplicate <- anyDuplicated(site_data[c("DateTime", "Depth")])
+    site_data <- slice(site_data, -duplicate) 
+  }
+  assert_that(anyDuplicated(site_data[c("DateTime", "Depth")]) == 0)
   
   #get max depth for cleaning
   nml <- read_nml(nml_file = file.path("2_setup_models/nml", 
