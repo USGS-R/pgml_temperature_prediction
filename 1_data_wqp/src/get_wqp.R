@@ -30,25 +30,22 @@ munge_temperature <- function(data.in){
     select(Date, wqx.id, depth, wtemp)
 }
 
-#use existing lookup table from necsc repo
-lookup <- readRDS('obs/wqp_nhdLookup.rds')
 
-nhd_find <- "nhd_13293262"
-
-library(dplyr)
-library(dataRetrieval)
-library(yaml)
-lookup_keep <- filter(lookup, id == nhd_find)
-config <- yaml.load_file('config/wqp_config.yml')
-wqp_args <- list(characteristicName=config$characteristicName,
-                 startDateLo=config$startDate,
-                 startDateHi=config$endDate,
-                 siteid=lookup_keep$MonitoringLocationIdentifier)
-wqp_raw <- readWQPdata(wqp_args)
-#watch out — there's some fahrenheit data!
-munged_wqp <- munge_temperature(wqp_raw)
-
-saveRDS(object = munged_wqp, file = "obs/mendota/partial/mendota_wqp.rds")
-
-
+wqp_lookup_retrieve <- function(nhd, outfile) {
+  #use existing lookup table from necsc repo
+  lookup <- readRDS('lib/crosswalks/wqp_nhdLookup.rds')
+  
+  lookup_keep <- filter(lookup, id == nhd)
+  config <- yaml.load_file('lib/cfg/wqp_config.yml')
+  wqp_args <- list(characteristicName=config$characteristicName,
+                   startDateLo=config$startDate,
+                   startDateHi=config$endDate,
+                   siteid=lookup_keep$MonitoringLocationIdentifier)
+  wqp_raw <- readWQPdata(wqp_args)
+  #watch out — there's some fahrenheit data!
+  munged_wqp <- munge_temperature(wqp_raw)
+  
+  saveRDS(object = munged_wqp, file = outfile)
+  s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))
+}
 

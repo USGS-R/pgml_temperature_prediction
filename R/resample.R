@@ -1,11 +1,11 @@
 #remeber to load netcdf first when on yeti
 library(glmtools)
 library(dplyr)
-resample <- function() {
-t <- resample_to_field(nc_file="output.nc", field_file="../../pgml_temperature_prediction/obs/mille_lacs/obs_only.tsv",
+resample <- function(nc_file, field_file, meteo_file) {
+t <- resample_to_field(nc_file=nc_file, field_file=field_file,
 			method="interp")
 t <- mutate(t, DateTime=as.Date(DateTime))
-meteo <- data.table::fread('../../pgml_temperature_prediction/meteo/nhd_13293262_driver.csv') %>% 
+meteo <- data.table::fread(meteo_file) %>% 
 	rename(DateTime=time) %>%
 	mutate(DateTime=as.Date(DateTime))
 #trim to model start/end dates to catch NAs
