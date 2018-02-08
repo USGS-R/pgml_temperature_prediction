@@ -5,7 +5,7 @@ library(glmtools)
 
 calculate_rmse <- function(offset, parent_folder, id, obs_file, out_file) {
 	#run model with diff param combos for optimization 
-	taskID <- as.numeric(Sys.getenv('SLURM_ARRAY_TASK_ID', 'NA'))# + 5000 #from yeti environment
+	taskID <- as.numeric(Sys.getenv('SLURM_ARRAY_TASK_ID', 'NA'))#from yeti environment
 	if(offset) {
 		taskID <- taskID + 5000
 	}
