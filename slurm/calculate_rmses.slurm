@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=calc_rmse     # name that you chose
-#SBATCH -p UV              # the partition you want to use, for this case prod is best
+#SBATCH -p normal             # the partition you want to use, for this case prod is best
 #SBATCH -A cida                 # your account
 #SBATCH -o shellLog/slurm-%A_%a.out
 #SBATCH --time=02:00:00        # time at which the process will be cancelled if unfinished
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=wwatkins@usgs.gov
 #SBATCH --export=ALL
-#SBATCH --array=1-5000        # process IDs 
+#SBATCH --array=1-4261        # process IDs 
 #SBATCH -n 1
 
 module load tools/netcdf-4.3.2-gnu
@@ -15,5 +15,5 @@ module load tools/netcdf-4.3.2-gnu
 #would be easier if scripts were functions... don't need goofy arg parsing
 #and switch to Rscript -e
 mkdir rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}
-Rscript --verbose -e 'source("R/calculate_rmse.R"); calculate_rmse(offset=FALSE, "../out", "WBIC_805400", "obs/mendota/mendota_combined.csv", "params_with_rmse_all_obs.csv")' > rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}/rlog.Rlog 2>%1
+Rscript --verbose -e 'source("R/calculate_rmse.R"); calculate_rmse(offset=TRUE, "../out", "WBIC_805400", "obs/mendota/training.csv", "params_with_rmse_new_training.csv")' > rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}/rlog.Rlog 2>%1
 
