@@ -14,6 +14,14 @@ with_meteo <- left_join(t, meteo, by = "DateTime") %>% filter(DateTime >= "1980-
 return(with_meteo)
 }
 
+get_temp_half_meter <- function(nc_file, nml_file) {
+	nml <- read_nml(nml_file)
+	depth <- get_nml_value(nml, 'lake_depth')
+  depths <- seq(0, depth, by = 0.5)
+  temps <- get_temp(nc_file, reference='surface', z_out = depths)
+  return(temps)
+}
+
 #add a logical column to denote training subset
 add_training_col <- function(df, starts, ends) {
 	assertthat::assert_that(length(starts) == length(ends))
