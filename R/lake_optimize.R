@@ -8,7 +8,7 @@ ptm <- proc.time()
 
 #########################################
 libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
-nhdID <- "nhd_13293262"
+nhdID <- "nhd_120052238"
 param_df <- read.csv('param_search/mendota_params.csv')
 obs_file <- 'obs/processed/nhd_13293262/mendota_combined.csv' 
 ############################
@@ -51,6 +51,7 @@ baseNML <- set_nml(baseNML, 'dt', 3600)
 baseNML <- set_nml(baseNML, 'timezone', -6)
 baseNML <- set_nml(baseNML, 'nsave', 24)
 baseNML <- set_nml(baseNML, 'out_dir', folderPath)
+baseNML <- set_nml(baseNML, 'meteo_fl', file.path("/lustre/projects/water/owi/booth-lakes/pgml-temperature-prediction/2_setup_models/meteo", paste0(nhdID, "_driver.csv")))
 if(!yeti){
   baseNML <- set_nml(baseNML, 'out_dir', '.')  #no 
 }

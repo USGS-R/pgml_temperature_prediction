@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=mendota2     # name that you chose
-#SBATCH -p UV              # the partition you want to use, for this case prod is best
+#SBATCH --job-name=kabet    # name that you chose
+#SBATCH -p normal              # the partition you want to use, for this case prod is best
 #SBATCH -A cida                 # your account
 #SBATCH -o shellLog/slurm-%A_%a.out
-#SBATCH --time=04:00:00        # time at which the process will be cancelled if unfinished
+#SBATCH --time=00:10:00        # time at which the process will be cancelled if unfinished
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=wwatkins@usgs.gov
 #SBATCH --export=ALL
-#SBATCH --array=4-4261          # process IDs 
+#SBATCH --array=1-2          # process IDs 
 #SBATCH -n 1
 offset_task_id=${1}
 echo $offset_task_id
@@ -28,5 +28,5 @@ module load tools/netcdf-4.3.2-gnu
 mkdir rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}
 R CMD BATCH --no-restore --no-save '--args '$1'' R/lake_optimize.R rlogs/${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}/rlog.Rlog 
 	
-cp -r ${LOCAL_SCRATCH}/WBIC_805400_optim_"$task_id_adj" /lustre/projects/water/owi/booth-lakes/out
+cp -r ${LOCAL_SCRATCH}/nhd_120052238_optim_"$task_id_adj" /lustre/projects/water/owi/booth-lakes/out_kabet
 sync
