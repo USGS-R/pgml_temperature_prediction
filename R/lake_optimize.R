@@ -9,11 +9,10 @@ ptm <- proc.time()
 #########################################
 libPath <- '/lustre/projects/water/owi/booth-lakes/rLibs'
 nhdID <- "nhd_13293262"
-stateID <- "WBIC_805400"
 param_df <- read.csv('param_search/mendota_params.csv')
 obs_file <- 'obs/processed/nhd_13293262/mendota_combined.csv' 
-base_nml_file <- 'nml/glm2_mendota.nml'
 ############################
+base_nml_file <- file.path('2_setup_models/nml', paste0("glm2_", nhdID, ".nml"))
 yeti=FALSE
 if(grepl(x = Sys.info()["nodename"], pattern = "cr.usgs.gov")) { #are we on yeti?
   .libPaths(libPath)
@@ -33,7 +32,7 @@ localScratch <- Sys.getenv('LOCAL_SCRATCH', unset="out") #write to diff director
 
 param_df_use <- param_df[taskID,]
 
-outFolder <- paste(stateID, "optim", taskID, sep ="_")
+outFolder <- paste(nhdID, "optim", taskID, sep ="_")
 #folderPath <- file.path("out2", outFolder)
 folderPath <- file.path(localScratch, outFolder)
 message(folderPath)
