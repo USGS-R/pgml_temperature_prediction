@@ -10,4 +10,5 @@ pest/pMaster_*
 !/1_data_s3/out/*.ind
 *.rds
 !/lib/crosswalks/*
+4_run_models/out/*
 
