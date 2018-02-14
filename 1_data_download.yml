@@ -11,6 +11,7 @@ sources:
   
 targets:
   all:
+    command: sc_indicate(I('1_data_download/data_download.ind'))
     depends:
     - 1_data_s3/out/long_term_ntl.csv.ind
     - 1_data_s3/out/mendota_daily_buoy.csv.ind
@@ -26,4 +27,4 @@ targets:
               
   1_data_s3/out/mendota_temps_long.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_data_download/out/mendota_temps_long.csv"),
-              url = I("https://lter.limnology.wisc.edu/file/12009/download?token=3PKYA08u2IqoDMiIKMHJaHhz9yDN727WCDpxCWwcy9s"))
+              url = I("https://lter.limnology.wisc.edu/sites/default/files/data/Lake_Mendota_temps_long.csv"))

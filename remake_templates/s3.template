@@ -8,11 +8,20 @@ target_default: all
 
 targets:
   all:  #this should be the final things
+    command: sc_indicate(I("1_data_s3/data_s3.ind"))
     depends:
+    - lib/cfg/s3_config.yml
     {{#targets}}
-    - 1_data_wqp/out/{{.}}.rds.ind
+    - 1_data_s3/out/{{.}}.ind
+    - 1_data_s3/out/{{.}}
     {{/targets}}
+  lib/cfg/s3_config.yml:
+    command: s3_config(config_file=target_name, bucket = I('pgml-temperature-prediction'))
+    
   {{#targets}}
-  {{name}}:
-    command: {{command}}
+  1_data_s3/out/{{.}}.ind:
+    command: s3_confirm_posted(ind_file = target_name)
+  1_data_s3/out/{{.}}:
+    command: s3_get('1_data_s3/out/{{.}}.ind')
+    
   {{/targets}}
