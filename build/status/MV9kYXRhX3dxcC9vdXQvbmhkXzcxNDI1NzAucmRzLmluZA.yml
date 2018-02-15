@@ -1,0 +1,14 @@
+version: 0.3.0
+name: 1_data_wqp/out/nhd_7142570.rds.ind
+type: file
+hash: 440b64bf667a5e58b837a749516047a6
+time: 2018-02-15 19:26:18 UTC
+depends:
+  lib/crosswalks/lakes_master.csv: ad28f1ee01f42c922f56a5af9ac5039a
+  lib/cfg/wqp_config.yml: 15f6c04c633642802cd2771809bb8516
+fixed: f176f6757b4f5631c7d96c76fbf6778d
+code:
+  functions:
+    munge_temperature: dd601cc1cccfb84fa5116b4d50b418fd
+    wqp_lookup_retrieve: 45a42aca31b2f43dfd75a6ac9b7c247f
+

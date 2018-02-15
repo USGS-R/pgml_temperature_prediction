@@ -18,6 +18,8 @@ targets:
     - 1_data_s3/data_s3.ind
     - 1_data_s3_cleaned.yml
     - 1_data_s3_cleaned/data_s3_cleaned.ind
+    - 1_data_wqp.yml
+    - 1_data_wqp/data_wqp.ind
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -37,4 +39,12 @@ targets:
     - remake_templates/s3_clean.template
   1_data_s3_cleaned/data_s3_cleaned.ind:
     command: scmake(remake_file = "1_data_s3_cleaned.yml")
+    
+  1_data_wqp.yml:
+    command: render_wqp()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/wqp.template
+  1_data_wqp/data_wqp.ind:
+    command: scmake(remake_file = "1_data_wqp.yml")
     

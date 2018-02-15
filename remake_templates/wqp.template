@@ -10,16 +10,19 @@ file_extensions:
 sources:
   - 1_data_wqp/src/get_wqp.R
 
-target_default: all
+target_default: all_wqp
 
 targets:
-  all:  #this should be the final things
+  all_wqp:
+    command: sc_indicate(I('1_data_wqp/data_wqp.ind'))
     depends:
     {{#nhd_ids}}
     - 1_data_wqp/out/{{.}}.rds.ind
     {{/nhd_ids}}
   {{#nhd_ids}}
   1_data_wqp/out/{{.}}.rds.ind:
-    command: wqp_lookup_retrieve(outfile = I("1_data_wqp/out/{{.}}.rds"), nhd = I("{{.}}"))
-    depends: lib/crosswalks/lakes_master.csv
+    command: wqp_lookup_retrieve(outind = target_name, nhd = I("{{.}}"))
+    depends: 
+    - lib/crosswalks/lakes_master.csv
+    - lib/cfg/wqp_config.yml
   {{/nhd_ids}}

@@ -31,10 +31,10 @@ munge_temperature <- function(data.in){
 }
 
 
-wqp_lookup_retrieve <- function(nhd, outfile) {
+wqp_lookup_retrieve <- function(nhd, outind) {
   #use existing lookup table from necsc repo
   lookup <- readRDS('lib/crosswalks/wqp_nhdLookup.rds')
-  
+  outfile <- as_data_file(outind)
   lookup_keep <- filter(lookup, id == nhd)
   config <- yaml.load_file('lib/cfg/wqp_config.yml')
   wqp_args <- list(characteristicName=config$characteristicName,
@@ -46,6 +46,6 @@ wqp_lookup_retrieve <- function(nhd, outfile) {
   munged_wqp <- munge_temperature(wqp_raw)
   
   saveRDS(object = munged_wqp, file = outfile)
-  s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))
+  s3_put(remote_ind = outind, local_source = outfile)
 }
 
