@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_cleaned/out/mendota_temps_long.rds.ind
+type: file
+hash: c17210bbaeed26bcdb350eee625cc3ce
+time: 2018-02-15 18:29:47 UTC
+depends:
+  1_data_s3/out/mendota_temps_long.csv.ind: 8a8043e3d3a43cfb1910835bb4053c0b
+fixed: be90469593ad34fa5628170934e49690
+code:
+  functions:
+    parse_mendota_temps_long: 544ceb438a77607582a8df2ec23e51a8
+
