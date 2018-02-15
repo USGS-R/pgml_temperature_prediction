@@ -8,7 +8,9 @@ packages:
   - dplyr
   
 sources:
-  - remake_templates/render_s3.R
+  - remake_templates/src/render_s3.R
+  - remake_templates/src/render_wqp.R
+  - remake_templates/src/render_setup_models.R
   
 targets:
   all:
@@ -20,6 +22,8 @@ targets:
     - 1_data_s3_cleaned/data_s3_cleaned.ind
     - 1_data_wqp.yml
     - 1_data_wqp/data_wqp.ind
+    - 2_setup_models.yml
+    - 2_setup_models/setup_models.ind
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -47,4 +51,12 @@ targets:
     - remake_templates/wqp.template
   1_data_wqp/data_wqp.ind:
     command: scmake(remake_file = "1_data_wqp.yml")
+    
+  2_setup_models.yml:
+    command: render_setup_models()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/setup_models.template
+  2_setup_models/setup_models.ind:
+    command: scmake(remake_file = "2_setup_models.yml")
     
