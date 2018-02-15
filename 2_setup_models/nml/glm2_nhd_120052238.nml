@@ -1,6 +1,6 @@
 &glm_setup
    sim_name = 'GLMSimulation'
-   max_layers = 135
+   max_layers = 1000
    min_layer_vol = 0.5
    min_layer_thick = 0.2
    max_layer_thick = 1.5
@@ -65,7 +65,7 @@
    albedo_mode = 1
    cloud_mode = 4
    subdaily = .false.
-   meteo_fl = '../../meteo/nhd_120052238_driver.csv'
+   meteo_fl = '2_setup_models/meteo/nhd_120052238_driver.csv'
    wind_factor = 1
    sw_factor = 1
    lw_factor = 1
