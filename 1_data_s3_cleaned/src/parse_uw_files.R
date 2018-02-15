@@ -1,6 +1,6 @@
-library(dplyr)
-parse_mendota_daily_buoy <- function(infile = "1_data_s3/out/mendota_daily_buoy.csv",
-                                     outfile = "1_data_s3_cleaned/out/mendota_daily_buoy.rds") {
+parse_mendota_daily_buoy <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
   raw_file <- data.table::fread(infile)
   #flag code definitions are in the EML format on the UW limno data site
   #https://lter.limnology.wisc.edu/data
@@ -9,17 +9,27 @@ parse_mendota_daily_buoy <- function(infile = "1_data_s3/out/mendota_daily_buoy.
     mutate(DateTime = as.Date(DateTime), UWID = "ME") %>% 
     select(DateTime, Depth, temp, UWID)
   saveRDS(object = clean, file = outfile)
-  scipiper::s3_put(remote_ind = scipiper::as_ind_file(outfile), 
-                   local_source = scipiper::as_ind_file(outfile))
+  s3_put(remote_ind = outind, local_source = outfile)
 }
 
-parse_long_term_ntl <- function(infile = "1_data_s3/out/long_term_ntl.csv",
-                                outfile = "1_data_s3_cleaned/out/long_term_ntl.rds") {
+parse_long_term_ntl <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
   raw_file <- data.table::fread(infile, select = c("lakeid", "sampledate", 
                                                    "depth", "wtemp"))
   clean <- raw_file %>% rename(UWID = lakeid, DateTime = sampledate, Depth = depth,
                                temp = wtemp) %>% mutate(DateTime = as.Date(DateTime)) 
   saveRDS(object = clean, file = outfile)
-  scipiper::s3_put(remote_ind = scipiper::as_ind_file(outfile), 
-                   local_source = scipiper::as_ind_file(outfile))
+  scipiper::s3_put(outind, local_source = outfile)
+}
+
+parse_mendota_temps_long <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw_file <- data.table::fread(infile, select = c("sampledate", "depth", "watertemp")) 
+  clean <- raw_file %>% mutate(UWID = "ME") %>% rename(DateTime = sampledate, 
+                                                       Depth = depth, temp = watertemp) %>% 
+              mutate(DateTime = as.Date(DateTime))
+  saveRDS(object = clean, file = outfile)
+  s3_put(outind, local_source = outfile)
 }

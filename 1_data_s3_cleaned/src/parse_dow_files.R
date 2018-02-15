@@ -1,6 +1,7 @@
 #parse various minnesota state agency data files
-parse_MPCA_temp_data_all <- function(infile = "1_data_s3/out/MPCA_temp_data_all.tsv",
-                         outfile = "1_data_s3_cleaned/out/MPCA_temp_data_all.rds") {
+parse_MPCA_temp_data_all <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
   raw_file <- data.table::fread(infile, colClasses = c(DOW="character"),
                                 select = c("SAMPLE_DATE", "START_DEPTH", "DEPTH_UNIT",
                                            "RESULT_NUMERIC", "RESULT_UNIT", "DOW"))
@@ -10,11 +11,12 @@ parse_MPCA_temp_data_all <- function(infile = "1_data_s3/out/MPCA_temp_data_all.
     mutate(SAMPLE_DATE = as.Date(SAMPLE_DATE, format = "%m/%d/%Y")) %>% 
     rename(DateTime = SAMPLE_DATE, Depth = START_DEPTH, temp = RESULT_NUMERIC)
   saveRDS(object = clean, file = outfile)
-  s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))
+  s3_put(remote_ind = outind, local_source = outfile)
 }
 
-parse_URL_Temp_Logger_2006_to_2017 <- function(infile = "1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb",
-                                               outfile = "1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds") {
+parse_URL_Temp_Logger_2006_to_2017 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
   tables <- Hmisc::mdb.get(infile)
   #3 tables in database
   df <- tables[['State Waters - 11 feet']]
@@ -30,11 +32,12 @@ parse_URL_Temp_Logger_2006_to_2017 <- function(infile = "1_data_s3/out/URL_Temp_
     filter(Time == "12:00:00") %>% 
     select(DateTime, Depth, temp, DOW) %>% arrange(DateTime)
   saveRDS(object = df_clean, file = outfile)
-  s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))
+  s3_put(remote_ind = outind, local_source =  outfile)
 }
 
-parse_MN_fisheries_all_temp_data_Jan2018 <- function(infile = "1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt",
-                                                     outfile = "1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds") {
+parse_MN_fisheries_all_temp_data_Jan2018 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
   raw <- data.table::fread(infile, colClasses = c(DOW="character"))
   #convert to meters depth and deg C temp
   clean <- raw %>% mutate(temp = 5/9*(TEMP_F - 32),
@@ -43,5 +46,5 @@ parse_MN_fisheries_all_temp_data_Jan2018 <- function(infile = "1_data_s3/out/MN_
                                              format = "%m/%d/%Y")) %>%  
     select(DateTime, Depth, temp, DOW)
   saveRDS(object = clean, file = outfile)
-  s3_put(remote_ind = as_ind_file(outfile), local_source =  as_ind_file(outfile))                        
+  s3_put(remote_ind = outind, local_source = inind)                        
 }

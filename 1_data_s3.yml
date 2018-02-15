@@ -4,10 +4,10 @@ packages:
 file_extensions:
   - ind
 
-target_default: all
+target_default: all_s3
 
 targets:
-  all:  #this should be the final things
+  all_s3:  #this should be the final things
     command: sc_indicate(I("1_data_s3/data_s3.ind"))
     depends:
     - lib/cfg/s3_config.yml

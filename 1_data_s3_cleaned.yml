@@ -1,48 +1,69 @@
+packages:
+  - scipiper
+
 file_extensions:
   - ind
 
-sources:
-  - 1_data_s3_cleaned/src/parse_uw_files.R
-  - 1_data_s3_cleaned/src/parse_dow_files.R
-  
-include:
+target_default: all
+
+include: 
   - 1_data_s3.yml
   
-packages:
-  - dplyr
-  - scipiper
-  - assertthat
- 
+sources:
+  - 1_data_s3_cleaned/src/parse_dow_files.R
+  - 1_data_s3_cleaned/src/parse_uw_files.R
+
 targets:
-  all:
+  all:  #this should be the final things
+    command: sc_indicate(I("1_data_s3_cleaned/data_s3_cleaned.ind"))
     depends:
-      - 1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind
-      - 1_data_s3_cleaned/out/long_term_ntl.rds.ind
-      - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind
-      - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind
-      - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind
-      
-  1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind:
-    command: parse_mendota_daily_buoy()
-    depends:
-      - 1_data_s3/out/mendota_daily_buoy.csv.ind
-      
+    - lib/cfg/s3_config.yml
+    - 1_data_s3_cleaned/out/long_term_ntl.rds.ind
+    - 1_data_s3_cleaned/out/long_term_ntl.rds
+    - 1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind
+    - 1_data_s3_cleaned/out/mendota_daily_buoy.rds
+    - 1_data_s3_cleaned/out/mendota_temps_long.rds.ind
+    - 1_data_s3_cleaned/out/mendota_temps_long.rds
+    - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind
+    - 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds
+    - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind
+    - 1_data_s3_cleaned/out/MPCA_temp_data_all.rds
+    - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind
+    - 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds
+  
   1_data_s3_cleaned/out/long_term_ntl.rds.ind:
-    command: parse_long_term_ntl()
-    depends:
-      - 1_data_s3/out/long_term_ntl.csv.ind
-      
-  1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind:
-    command: parse_MPCA_temp_data_all()
-    depends:
-      - 1_data_s3/out/MPCA_temp_data_all.tsv.ind
-      
-  1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind:
-    command: parse_URL_Temp_Logger_2006_to_2017()
-    depends:
-      - 1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind
-      
+    command: parse_long_term_ntl(outind=target_name, 
+                                inind = '1_data_s3/out/long_term_ntl.csv.ind')
+  1_data_s3_cleaned/out/long_term_ntl.rds:
+    command: s3_get('1_data_s3_cleaned/out/long_term_ntl.rds.ind')
+    
+  1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind:
+    command: parse_mendota_daily_buoy(outind=target_name, 
+                                inind = '1_data_s3/out/mendota_daily_buoy.csv.ind')
+  1_data_s3_cleaned/out/mendota_daily_buoy.rds:
+    command: s3_get('1_data_s3_cleaned/out/mendota_daily_buoy.rds.ind')
+    
+  1_data_s3_cleaned/out/mendota_temps_long.rds.ind:
+    command: parse_mendota_temps_long(outind=target_name, 
+                                inind = '1_data_s3/out/mendota_temps_long.csv.ind')
+  1_data_s3_cleaned/out/mendota_temps_long.rds:
+    command: s3_get('1_data_s3_cleaned/out/mendota_temps_long.rds.ind')
+    
   1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind:
-    command: parse_MN_fisheries_all_temp_data_Jan2018()
-    depends:
-      - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind
+    command: parse_MN_fisheries_all_temp_data_Jan2018(outind=target_name, 
+                                inind = '1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind')
+  1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds:
+    command: s3_get('1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind')
+    
+  1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind:
+    command: parse_MPCA_temp_data_all(outind=target_name, 
+                                inind = '1_data_s3/out/MPCA_temp_data_all.tsv.ind')
+  1_data_s3_cleaned/out/MPCA_temp_data_all.rds:
+    command: s3_get('1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind')
+    
+  1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind:
+    command: parse_URL_Temp_Logger_2006_to_2017(outind=target_name, 
+                                inind = '1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind')
+  1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds:
+    command: s3_get('1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+    
