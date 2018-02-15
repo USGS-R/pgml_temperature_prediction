@@ -4,7 +4,7 @@ packages:
 file_extensions:
   - ind
 
-target_default: all
+target_default: all_s3_cleaned
 
 include: 
   - 1_data_s3.yml
@@ -14,7 +14,7 @@ sources:
   - 1_data_s3_cleaned/src/parse_uw_files.R
 
 targets:
-  all:  #this should be the final things
+  all_s3_cleaned:  #this should be the final things
     command: sc_indicate(I("1_data_s3_cleaned/data_s3_cleaned.ind"))
     depends:
     - lib/cfg/s3_config.yml
