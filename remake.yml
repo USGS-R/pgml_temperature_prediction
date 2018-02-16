@@ -6,11 +6,13 @@ packages:
   - whisker
   - assertthat
   - dplyr
+  - tools
   
 sources:
   - remake_templates/src/render_s3.R
   - remake_templates/src/render_wqp.R
   - remake_templates/src/render_setup_models.R
+  - remake_templates/src/render_assimilate.R
   
 targets:
   all:
@@ -24,6 +26,8 @@ targets:
     - 1_data_wqp/data_wqp.ind
     - 2_setup_models.yml
     - 2_setup_models/setup_models.ind
+    - 3_assimilate_data.yml
+    - 3_assimilate_data/assimilate_data.ind
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -60,3 +64,10 @@ targets:
   2_setup_models/setup_models.ind:
     command: scmake(remake_file = "2_setup_models.yml")
     
+  3_assimilate_data.yml:
+    command: render_assimilate()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/assimilate.template
+  3_assimilate_data/assimilate_data.ind:
+    command: scmake(remake_file = "3_assimilate_data.yml")

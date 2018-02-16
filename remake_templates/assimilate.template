@@ -12,22 +12,30 @@ file_extensions:
 sources:
   - 3_assimilate_data/src/assimilate.R 
 
-target_default: all
+target_default: all_assimilate
+
+include:
+  - 1_data_s3_cleaned.yml
+  - 1_data_wqp.yml
 
 targets:
-  all:  #this should be the final things
+  all_assimilate:  #this should be the final things
+    command: sc_indicate(I('3_assimilate_data/assimilate_data.ind'))
     depends:
   {{#targets}}
       - 3_assimilate_data/out/{{nhd}}.rds.ind
+      - 3_assimilate_data/out/{{nhd}}.rds
   {{/targets}}
   
   {{#targets}}
   3_assimilate_data/out/{{nhd}}.rds.ind:
-    command: assimilate_data(nhd_id = I("{{nhd}}"), files = I(c({{files_collapse}})), state_src = I("{{state_source}}"), state_id = I(c({{state_id}})))
+    command: assimilate_data(nhd_id = I("{{nhd}}"), state_src = I("{{state_source}}"), 
+             state_id = I(c({{state_id}})), wqp_file = '1_data_wqp/out/{{nhd}}.rds.ind',
+             {{files_collapse}})
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
-      {{#files}}
-      - {{.}}
-      {{/files}}
+      - lib/cfg/base_model_config.yml
+  3_assimilate_data/out/{{nhd}}.rds:
+    command: s3_get('3_assimilate_data/out/{{nhd}}.rds.ind')
       
   {{/targets}}
