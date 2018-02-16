@@ -46,5 +46,5 @@ parse_MN_fisheries_all_temp_data_Jan2018 <- function(inind, outind) {
                                              format = "%m/%d/%Y")) %>%  
     select(DateTime, Depth, temp, DOW)
   saveRDS(object = clean, file = outfile)
-  s3_put(remote_ind = outind, local_source = inind)                        
+  s3_put(remote_ind = outind, local_source = outfile)                        
 }

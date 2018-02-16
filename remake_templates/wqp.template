@@ -25,4 +25,7 @@ targets:
     depends: 
     - lib/crosswalks/lakes_master.csv
     - lib/cfg/wqp_config.yml
+  1_data_wqp/out/{{.}}.rds:
+    command: s3_get('1_data_wqp/out/{{.}}.rds.ind')
+    
   {{/nhd_ids}}

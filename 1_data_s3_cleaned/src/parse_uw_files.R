@@ -29,7 +29,8 @@ parse_mendota_temps_long <- function(inind, outind) {
   raw_file <- data.table::fread(infile, select = c("sampledate", "depth", "watertemp")) 
   clean <- raw_file %>% mutate(UWID = "ME") %>% rename(DateTime = sampledate, 
                                                        Depth = depth, temp = watertemp) %>% 
-              mutate(DateTime = as.Date(DateTime))
+              filter(Depth != "MUD") %>% 
+    mutate(DateTime = as.Date(DateTime), Depth = as.numeric(Depth))
   saveRDS(object = clean, file = outfile)
   s3_put(outind, local_source = outfile)
 }
