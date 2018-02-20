@@ -1,6 +1,3 @@
-#first render the remake file, then run it
-#need to functionalize render
-
 packages:
   - scipiper
   - whisker

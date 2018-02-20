@@ -1,8 +1,8 @@
 version: 0.3.0
 name: 3_assimilate_data/out/nhd_120052195.rds.ind
 type: file
-hash: f22b2633e2ec33327a80cc063c7e5b99
-time: 2018-02-16 18:18:30 UTC
+hash: dc82d5e56f0706dded914c2ea3db8213
+time: 2018-02-16 21:34:07 UTC
 depends:
   1_data_wqp/out/nhd_120052195.rds.ind: 52624e6dbdb53ada5c4c2c89385d0a32
   1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind: 3b03c0f12042072784a6096deb91f4da
@@ -13,6 +13,6 @@ depends:
 fixed: 104f99e3cfc8a5578105c1a992cfa231
 code:
   functions:
-    assimilate_data: 333b6766f92d0f50631fea27411f5fe2
+    assimilate_data: 90054d377769fb5967cecdb0913a2b41
     clean_universal: fe381ef6c170f785313a54dd101530db
 

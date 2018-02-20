@@ -1,7 +1,7 @@
 file,id
 long_term_ntl.csv,UWID
 mendota_daily_buoy.csv,UWID
-mendota_temps_long.csv, UWID
+mendota_temps_long.csv,UWID
 MN_fisheries_all_temp_data_Jan2018.txt,DOW
 MPCA_temp_data_all.tsv,DOW
 URL_Temp_Logger_2006_to_2017.accdb,DOW

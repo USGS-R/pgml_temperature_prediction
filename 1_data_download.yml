@@ -9,8 +9,10 @@ file_extensions:
 sources:
   - 1_data_download/src/download_and_indicate.R
   
+target_default: all_download
+  
 targets:
-  all:
+  all_download:
     command: sc_indicate(I('1_data_download/data_download.ind'))
     depends:
     - 1_data_s3/out/long_term_ntl.csv.ind
@@ -19,11 +21,11 @@ targets:
     
   1_data_s3/out/long_term_ntl.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_data_download/out/long_term_ntl.csv"), 
-             url = I("https://lter.limnology.wisc.edu/file/12809/download?token=nXz1cfck_9CtG8K4qej2L_M94LM3epXPMFItQLKaPfw"))
+             url = I("https://lter.limnology.wisc.edu/sites/default/files/data/ntl29_v5.csv"))
              
   1_data_s3/out/mendota_daily_buoy.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_data_download/out/mendota_daily_buoy.csv"),
-              url = I("https://lter.limnology.wisc.edu/file/12861/download?token=u7og1mMGAJ9g41O1E-tiHMK8THR9gPZ6u7WpZ1HLD9U"))
+              url = I("https://lter.limnology.wisc.edu/sites/default/files/data/ntl130_1_v5.csv"))
               
   1_data_s3/out/mendota_temps_long.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_data_download/out/mendota_temps_long.csv"),
