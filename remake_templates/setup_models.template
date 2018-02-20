@@ -1,0 +1,31 @@
+packages:
+  - scipiper
+  - mda.lakes
+
+file_extensions:
+  - ind
+
+target_default: all_setup_models
+
+sources:
+  - 2_setup_models/src/setup_model_files.R
+
+targets:
+  all_setup_models:
+    command: sc_indicate(I('2_setup_models/setup_models.ind'))
+    depends:
+    {{#nhd}}
+    - 2_setup_models/meteo/{{.}}_driver.csv.ind
+    - 2_setup_models/meteo/{{.}}_driver.csv
+    - 2_setup_models/nml/glm2_{{.}}.nml
+    {{/nhd}}
+    
+  {{#nhd}}  
+  2_setup_models/meteo/{{.}}_driver.csv.ind:
+    command: get_post_driver_file(outind = target_name, nhd = I('{{.}}'))
+  2_setup_models/meteo/{{.}}_driver.csv:
+    command: s3_get('2_setup_models/meteo/{{.}}_driver.csv.ind')
+  2_setup_models/nml/glm2_{{.}}.nml:
+    command: get_lake_base_nml(nhd = I('{{.}}'), glm_out = I("2_setup_models/nml/glm2_{{.}}.nml"))
+  
+  {{/nhd}}

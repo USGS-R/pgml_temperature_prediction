@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind
+type: file
+hash: 66e61d80281059bfd595452d30c506ed
+time: 2018-02-15 18:29:56 UTC
+depends:
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind: 07b5817846e434d0180cc429f2c91a5f
+fixed: f0f4f0d629e278d97df7d39b001831b3
+code:
+  functions:
+    parse_URL_Temp_Logger_2006_to_2017: 8a74eda41239c34358caa6279fb348f2
+

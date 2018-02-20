@@ -1,0 +1,7 @@
+#correspond to columns in master_lakes crosswalk
+#files associated with these codes in rawfile to id crosswalk 
+#will be checked for data if their value isn't NA in master croswa
+
+state_data_sources: 
+  - DOW
+  - UWID

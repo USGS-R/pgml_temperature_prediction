@@ -1,0 +1,73 @@
+#first render the remake file, then run it
+#need to functionalize render
+
+packages:
+  - scipiper
+  - whisker
+  - assertthat
+  - dplyr
+  - tools
+  
+sources:
+  - remake_templates/src/render_s3.R
+  - remake_templates/src/render_wqp.R
+  - remake_templates/src/render_setup_models.R
+  - remake_templates/src/render_assimilate.R
+  
+targets:
+  all:
+    depends:
+    - 1_data_download/data_download.ind
+    - 1_data_s3.yml
+    - 1_data_s3/data_s3.ind
+    - 1_data_s3_cleaned.yml
+    - 1_data_s3_cleaned/data_s3_cleaned.ind
+    - 1_data_wqp.yml
+    - 1_data_wqp/data_wqp.ind
+    - 2_setup_models.yml
+    - 2_setup_models/setup_models.ind
+    - 3_assimilate_data.yml
+    - 3_assimilate_data/assimilate_data.ind
+    
+  1_data_download/data_download.ind:
+    command: scmake(remake_file = "1_data_download.yml")
+  
+  1_data_s3.yml:
+    command: render_s3()
+    depends: 
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/s3.template
+  1_data_s3/data_s3.ind:
+    command: scmake(remake_file = "1_data_s3.yml")
+    
+  1_data_s3_cleaned.yml:
+    command: render_s3_clean()
+    depends:
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/s3_clean.template
+  1_data_s3_cleaned/data_s3_cleaned.ind:
+    command: scmake(remake_file = "1_data_s3_cleaned.yml")
+    
+  1_data_wqp.yml:
+    command: render_wqp()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/wqp.template
+  1_data_wqp/data_wqp.ind:
+    command: scmake(remake_file = "1_data_wqp.yml")
+    
+  2_setup_models.yml:
+    command: render_setup_models()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/setup_models.template
+  2_setup_models/setup_models.ind:
+    command: scmake(remake_file = "2_setup_models.yml")
+    
+  3_assimilate_data.yml:
+    command: render_assimilate()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/assimilate.template
+  3_assimilate_data/assimilate_data.ind:
+    command: scmake(remake_file = "3_assimilate_data.yml")

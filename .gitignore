@@ -1,2 +1,15 @@
 rlogs/*
 shellLog/*
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+out/*
+pest/pMaster_*
+1_data_s3/out/*
+!/1_data_s3/out/*.ind
+*.rds
+!/lib/crosswalks/*
+4_run_models/out/*
+1_data_download/out/*
+
