@@ -12,21 +12,13 @@ file_extensions:
 sources:
   - 3_assimilate_data/src/assimilate.R 
 
-target_default: all_assimilate
+target_default: 3_assimilate_data/out/data_summary_plots.pdf
 
 include:
   - 1_data_s3_cleaned.yml
   - 1_data_wqp.yml
 
 targets:
-  all_assimilate:  #this should be the final things
-    command: sc_indicate(I('3_assimilate_data/assimilate_data.ind'))
-    depends:
-  {{#targets}}
-      - 3_assimilate_data/out/{{nhd}}.rds.ind
-      - 3_assimilate_data/out/{{nhd}}.rds
-  {{/targets}}
-  
   {{#targets}}
   3_assimilate_data/out/{{nhd}}.rds.ind:
     command: assimilate_data(nhd_id = I("{{nhd}}"), state_src = I("{{state_source}}"), 
@@ -39,3 +31,7 @@ targets:
     command: s3_get('3_assimilate_data/out/{{nhd}}.rds.ind')
       
   {{/targets}}
+  3_assimilate_data/out/data_summary_plots.pdf:
+    {{#out_files_collapsed}}
+    command: summarize_assimilated({{.}})
+    {{/out_files_collapsed}}

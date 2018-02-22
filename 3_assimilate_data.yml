@@ -12,35 +12,13 @@ file_extensions:
 sources:
   - 3_assimilate_data/src/assimilate.R 
 
-target_default: all_assimilate
+target_default: 3_assimilate_data/out/data_summary_plots.pdf
 
 include:
   - 1_data_s3_cleaned.yml
   - 1_data_wqp.yml
 
 targets:
-  all_assimilate:  #this should be the final things
-    command: sc_indicate(I('3_assimilate_data/assimilate_data.ind'))
-    depends:
-      - 3_assimilate_data/out/nhd_120052238.rds.ind
-      - 3_assimilate_data/out/nhd_120052238.rds
-      - 3_assimilate_data/out/nhd_4817675.rds.ind
-      - 3_assimilate_data/out/nhd_4817675.rds
-      - 3_assimilate_data/out/nhd_120052195.rds.ind
-      - 3_assimilate_data/out/nhd_120052195.rds
-      - 3_assimilate_data/out/nhd_2360642.rds.ind
-      - 3_assimilate_data/out/nhd_2360642.rds
-      - 3_assimilate_data/out/nhd_120052233.rds.ind
-      - 3_assimilate_data/out/nhd_120052233.rds
-      - 3_assimilate_data/out/nhd_120052889.rds.ind
-      - 3_assimilate_data/out/nhd_120052889.rds
-      - 3_assimilate_data/out/nhd_7142570.rds.ind
-      - 3_assimilate_data/out/nhd_7142570.rds
-      - 3_assimilate_data/out/nhd_120052896.rds.ind
-      - 3_assimilate_data/out/nhd_120052896.rds
-      - 3_assimilate_data/out/nhd_13293262.rds.ind
-      - 3_assimilate_data/out/nhd_13293262.rds
-  
   3_assimilate_data/out/nhd_120052238.rds.ind:
     command: assimilate_data(nhd_id = I("nhd_120052238"), state_src = I("DOW"), 
              state_id = I(c('69084500')), wqp_file = '1_data_wqp/out/nhd_120052238.rds.ind',
@@ -131,3 +109,5 @@ targets:
   3_assimilate_data/out/nhd_13293262.rds:
     command: s3_get('3_assimilate_data/out/nhd_13293262.rds.ind')
       
+  3_assimilate_data/out/data_summary_plots.pdf:
+    command: summarize_assimilated('3_assimilate_data/out/nhd_120052238.rds.ind','3_assimilate_data/out/nhd_4817675.rds.ind','3_assimilate_data/out/nhd_120052195.rds.ind','3_assimilate_data/out/nhd_2360642.rds.ind','3_assimilate_data/out/nhd_120052233.rds.ind','3_assimilate_data/out/nhd_120052889.rds.ind','3_assimilate_data/out/nhd_7142570.rds.ind','3_assimilate_data/out/nhd_120052896.rds.ind','3_assimilate_data/out/nhd_13293262.rds.ind')

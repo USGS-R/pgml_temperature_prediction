@@ -34,7 +34,9 @@ render_assimilate <- function(){
     targets[[i]] <- list(nhd = nhd_id, files_collapse = file_list_string, 
                          state_source = state_source, state_id = state_ids_string)
   }
-  targets <- list(targets=targets)
+  out_files_collapsed <- paste(shQuote(paste0("3_assimilate_data/out/", 
+                                unique_nhd_lakes, ".rds.ind")), collapse = ",")
+  targets <- list(targets=targets, out_files_collapsed = list(out_files_collapsed))
   out <- whisker.render(template = template, data = targets)
   cat(out, file = '3_assimilate_data.yml')
 }
