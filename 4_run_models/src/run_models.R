@@ -1,5 +1,9 @@
-library(glmtools)
-library(GLMr)
+setup_model_dir <- function()
+
+
+
+
+
 run_model <- function(nhd_id) {
   #create model directory, change nml values
   #get things from the global config file
