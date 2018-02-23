@@ -10,8 +10,8 @@ render_s3 <- function(){
   cat(out, file = '1_data_s3.yml')
 }
 
-render_s3_clean <- function(){
-  template <- readLines('remake_templates/s3_clean.template')
+render_s3_assimilate <- function(){
+  template <- readLines('remake_templates/s3_assimilate.template')
   with_ext <- read.csv('lib/crosswalks/rawfile_to_id_crosswalk.csv', stringsAsFactors = FALSE)$file
   no_ext <- tools::file_path_sans_ext(with_ext)
   targets <- vector("list", length(with_ext))
@@ -22,7 +22,7 @@ render_s3_clean <- function(){
   }
   targets <- list(targets=targets)
   out <- whisker.render(template = template, data = targets)
-  cat(out, file = '1_data_s3_cleaned.yml')
+  cat(out, file = '1_data_s3_assimilate.yml')
 }
 
 

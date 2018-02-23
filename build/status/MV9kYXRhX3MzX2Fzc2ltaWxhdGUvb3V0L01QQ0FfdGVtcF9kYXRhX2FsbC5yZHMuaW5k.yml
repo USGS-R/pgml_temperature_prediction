@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind
+type: file
+hash: 56eaeb1bb53178126243e896fc7a36db
+time: 2018-02-23 20:01:52 UTC
+depends:
+  1_data_s3/out/MPCA_temp_data_all.tsv.ind: fbc3605e6b452ba19db798be6da13c2a
+fixed: fdca404f88f99dde35db8a0b9b0018eb
+code:
+  functions:
+    parse_MPCA_temp_data_all: 8da2ec0906dd86599c09dce3d403e62f
+

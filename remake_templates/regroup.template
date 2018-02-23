@@ -5,33 +5,34 @@ packages:
   - dataRetrieval
   - assertthat
   - glmtools
+  - ggplot2
 
 file_extensions:
   - ind
 
 sources:
-  - 3_assimilate_data/src/assimilate.R 
+  - 3_regroup_data/src/regroup.R 
 
-target_default: 3_assimilate_data/out/data_summary_plots.pdf
+target_default: 3_regroup_data/out/data_summary_plots.pdf
 
 include:
-  - 1_data_s3_cleaned.yml
+  - 1_data_s3_assimilate.yml
   - 1_data_wqp.yml
 
 targets:
   {{#targets}}
-  3_assimilate_data/out/{{nhd}}.rds.ind:
-    command: assimilate_data(nhd_id = I("{{nhd}}"), state_src = I("{{state_source}}"), 
+  3_regroup_data/out/{{nhd}}.rds.ind:
+    command: regroup_data(nhd_id = I("{{nhd}}"), state_src = I("{{state_source}}"), 
              state_id = I(c({{state_id}})), wqp_file = '1_data_wqp/out/{{nhd}}.rds.ind',
              {{files_collapse}})
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
-  3_assimilate_data/out/{{nhd}}.rds:
-    command: s3_get('3_assimilate_data/out/{{nhd}}.rds.ind')
+  3_regroup_data/out/{{nhd}}.rds:
+    command: s3_get('3_regroup_data/out/{{nhd}}.rds.ind')
       
   {{/targets}}
-  3_assimilate_data/out/data_summary_plots.pdf:
+  3_regroup_data/out/data_summary_plots.pdf:
     {{#out_files_collapsed}}
-    command: summarize_assimilated({{.}})
+    command: summarize_regrouped({{.}})
     {{/out_files_collapsed}}

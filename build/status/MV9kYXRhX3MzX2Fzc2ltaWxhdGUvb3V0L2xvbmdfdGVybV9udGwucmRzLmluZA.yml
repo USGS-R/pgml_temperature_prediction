@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_assimilate/out/long_term_ntl.rds.ind
+type: file
+hash: 74d2ae4ec413a2edf565869033c69342
+time: 2018-02-23 20:01:35 UTC
+depends:
+  1_data_s3/out/long_term_ntl.csv.ind: 4fef2974e4db9176ae46a2f06baab26f
+fixed: 67fa90d5e078db822b5d265349d0e29f
+code:
+  functions:
+    parse_long_term_ntl: fa755845ad0c1277233e6ca6519ecfa9
+

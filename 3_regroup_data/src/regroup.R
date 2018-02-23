@@ -12,8 +12,8 @@ clean_universal <- function(df, base_model_cfg, max_depth) {
 #then get WQP data
 #do universal cleaning + depth filtering based on lake nml max depth
 #dots are cleaned files to look in for this site
-assimilate_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
-  cleaned_files <- lapply(c(...), sc_retrieve, remake_file = "1_data_s3_cleaned.yml")
+regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
+  cleaned_files <- lapply(c(...), sc_retrieve, remake_file = "1_data_s3_assimilate.yml")
   wqp_file <- sc_retrieve(wqp_file, remake_file = "1_data_wqp.yml")
   site_data <- data.frame()
   for(f in cleaned_files) {
@@ -42,13 +42,13 @@ assimilate_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
   max_depth <- get_nml_value(nml, "lake_depth")
   cleaned <- clean_universal(site_data, "lib/cfg/base_model_config.yml",
                              max_depth)
-  outfile <- paste0("3_assimilate_data/out/", nhd_id, ".rds")
+  outfile <- paste0("3_regroup_data/out/", nhd_id, ".rds")
   saveRDS(object = cleaned, file = outfile)
   s3_put(remote_ind = as_ind_file(outfile), local_source =  outfile) 
 }
 
-summarize_assimilated <- function(...){
-  files <- lapply(c(...), sc_retrieve, remake_file = "3_assimilate_data.yml")
+summarize_regrouped <- function(...){
+  files <- lapply(c(...), sc_retrieve, remake_file = "3_regroup_data.yml")
   #load all the data
   data_list <- lapply(X = files, readRDS)
   all_data <- do.call(what = bind_rows, data_list)
@@ -69,6 +69,6 @@ summarize_assimilated <- function(...){
   depth_plot <- ggplot(all_data, aes(x = DateTime, y = Depth)) +
     geom_point(size = 0.7) + scale_y_reverse() +
     facet_wrap( ~ facet_label, ncol=2)
-  ggsave(file.path('3_assimilate_data/out/data_summary_plots.pdf'), depth_plot, width = 12, height = 8)
+  ggsave(file.path('3_regroup_data/out/data_summary_plots.pdf'), depth_plot, width = 12, height = 8)
 }
 

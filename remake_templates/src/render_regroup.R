@@ -1,5 +1,5 @@
-render_assimilate <- function(){
-  template <- readLines('remake_templates/assimilate.template')
+render_regroup <- function(){
+  template <- readLines('remake_templates/regroup.template')
   master_table <- readr::read_csv('lib/crosswalks/lakes_master.csv') 
   
   #check if these columns are not NA for this NHD id
@@ -28,15 +28,15 @@ render_assimilate <- function(){
     state_ids <- nas_gone[[state_source]]
     
     raw_files_to_check <- filter(raw_files, id == state_source)$file %>% 
-      file_path_sans_ext(.) %>% paste("rds", sep=".") %>% file.path("1_data_s3_cleaned/out", .)
+      file_path_sans_ext(.) %>% paste("rds", sep=".") %>% file.path("1_data_s3_assimilate/out", .)
     file_list_string <- paste(shQuote(paste0(raw_files_to_check, ".ind")), collapse = ",")
     state_ids_string <- paste(shQuote(state_ids), collapse = ",")
     targets[[i]] <- list(nhd = nhd_id, files_collapse = file_list_string, 
                          state_source = state_source, state_id = state_ids_string)
   }
-  out_files_collapsed <- paste(shQuote(paste0("3_assimilate_data/out/", 
+  out_files_collapsed <- paste(shQuote(paste0("3_regroup_data/out/", 
                                 unique_nhd_lakes, ".rds.ind")), collapse = ",")
   targets <- list(targets=targets, out_files_collapsed = list(out_files_collapsed))
   out <- whisker.render(template = template, data = targets)
-  cat(out, file = '3_assimilate_data.yml')
+  cat(out, file = '3_regroup_data.yml')
 }
