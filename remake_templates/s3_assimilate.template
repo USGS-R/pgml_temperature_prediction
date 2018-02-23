@@ -1,0 +1,33 @@
+packages:
+  - scipiper
+
+file_extensions:
+  - ind
+
+target_default: all_s3_assimilate
+
+include: 
+  - 1_data_s3.yml
+  
+sources:
+  - 1_data_s3_assimilate/src/parse_dow_files.R
+  - 1_data_s3_assimilate/src/parse_uw_files.R
+
+targets:
+  all_s3_assimilate:  #this should be the final things
+    command: sc_indicate(I("1_data_s3_assimilate/data_s3_assimilate.ind"))
+    depends:
+    - lib/cfg/s3_config.yml
+    {{#targets}}
+    - 1_data_s3_assimilate/out/{{no_ext}}.rds.ind
+    - 1_data_s3_assimilate/out/{{no_ext}}.rds
+    {{/targets}}
+  
+  {{#targets}}
+  1_data_s3_assimilate/out/{{no_ext}}.rds.ind:
+    command: parse_{{no_ext}}(outind=target_name, 
+                                inind = '1_data_s3/out/{{with_ext}}.ind')
+  1_data_s3_assimilate/out/{{no_ext}}.rds:
+    command: s3_get('1_data_s3_assimilate/out/{{no_ext}}.rds.ind')
+    
+  {{/targets}}

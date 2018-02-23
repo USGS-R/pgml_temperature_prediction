@@ -1,8 +1,8 @@
 version: 0.3.0
 name: 3_assimilate_data/out/nhd_13293262.rds.ind
 type: file
-hash: 13410d6b803f88774c0903a466d0714f
-time: 2018-02-16 18:18:54 UTC
+hash: 9f1e294dea3fbf5c699273a91436ae5e
+time: 2018-02-16 21:34:32 UTC
 depends:
   1_data_wqp/out/nhd_13293262.rds.ind: cdbab69dcf20f33c6c1128f732b8c24e
   1_data_s3_cleaned/out/long_term_ntl.rds.ind: 74d2ae4ec413a2edf565869033c69342
@@ -13,6 +13,6 @@ depends:
 fixed: 1b6cd2d3f67e8f20430e32101f088efb
 code:
   functions:
-    assimilate_data: 333b6766f92d0f50631fea27411f5fe2
+    assimilate_data: 90054d377769fb5967cecdb0913a2b41
     clean_universal: fe381ef6c170f785313a54dd101530db
 

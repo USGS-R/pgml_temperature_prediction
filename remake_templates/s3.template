@@ -4,6 +4,9 @@ packages:
 file_extensions:
   - ind
 
+include:
+  - 1_data_download.yml
+
 target_default: all_s3
 
 targets:

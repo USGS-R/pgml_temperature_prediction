@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_assimilate/out/mendota_daily_buoy.rds.ind
+type: file
+hash: 44c3763c3eec72b65a9ce52e53afba74
+time: 2018-02-23 20:01:37 UTC
+depends:
+  1_data_s3/out/mendota_daily_buoy.csv.ind: 20c7a7553cef73c6bcdf5504729c37c9
+fixed: b6fbb97c7592abad9b2e7a56d7971d1d
+code:
+  functions:
+    parse_mendota_daily_buoy: fe8364fb609c2d6b019e0ab4fb76456f
+

@@ -1,6 +1,3 @@
-#first render the remake file, then run it
-#need to functionalize render
-
 packages:
   - scipiper
   - whisker
@@ -12,7 +9,7 @@ sources:
   - remake_templates/src/render_s3.R
   - remake_templates/src/render_wqp.R
   - remake_templates/src/render_setup_models.R
-  - remake_templates/src/render_assimilate.R
+  - remake_templates/src/render_regroup.R
   
 targets:
   all:
@@ -20,14 +17,14 @@ targets:
     - 1_data_download/data_download.ind
     - 1_data_s3.yml
     - 1_data_s3/data_s3.ind
-    - 1_data_s3_cleaned.yml
-    - 1_data_s3_cleaned/data_s3_cleaned.ind
+    - 1_data_s3_assimilate.yml
+    - 1_data_s3_assimilate/data_s3_assimilate.ind
     - 1_data_wqp.yml
     - 1_data_wqp/data_wqp.ind
     - 2_setup_models.yml
     - 2_setup_models/setup_models.ind
-    - 3_assimilate_data.yml
-    - 3_assimilate_data/assimilate_data.ind
+    - 3_regroup_data.yml
+    - 3_regroup_data/out/data_summary_plots.pdf
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -40,13 +37,13 @@ targets:
   1_data_s3/data_s3.ind:
     command: scmake(remake_file = "1_data_s3.yml")
     
-  1_data_s3_cleaned.yml:
-    command: render_s3_clean()
+  1_data_s3_assimilate.yml:
+    command: render_s3_assimilate()
     depends:
     - lib/crosswalks/rawfile_to_id_crosswalk.csv
-    - remake_templates/s3_clean.template
-  1_data_s3_cleaned/data_s3_cleaned.ind:
-    command: scmake(remake_file = "1_data_s3_cleaned.yml")
+    - remake_templates/s3_assimilate.template
+  1_data_s3_assimilate/data_s3_assimilate.ind:
+    command: scmake(remake_file = "1_data_s3_assimilate.yml")
     
   1_data_wqp.yml:
     command: render_wqp()
@@ -64,10 +61,10 @@ targets:
   2_setup_models/setup_models.ind:
     command: scmake(remake_file = "2_setup_models.yml")
     
-  3_assimilate_data.yml:
-    command: render_assimilate()
+  3_regroup_data.yml:
+    command: render_regroup()
     depends:
     - lib/crosswalks/lakes_master.csv
-    - remake_templates/assimilate.template
-  3_assimilate_data/assimilate_data.ind:
-    command: scmake(remake_file = "3_assimilate_data.yml")
+    - remake_templates/regroup.template
+  3_regroup_data/out/data_summary_plots.pdf:
+    command: scmake(remake_file = "3_regroup_data.yml")
