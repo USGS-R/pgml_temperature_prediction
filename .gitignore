@@ -12,4 +12,5 @@ pest/pMaster_*
 !/lib/crosswalks/*
 4_run_models/out/*
 1_data_download/out/*
+2_setup_models/meteo/*.csv
 
