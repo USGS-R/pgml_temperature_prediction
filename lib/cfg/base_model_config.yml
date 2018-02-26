@@ -1,3 +1,8 @@
 max_temp: 40 #deg c  observed temps above will be filtered out in cleaning
-start_date: 1980-04-01
-end_date: 2016-10-01
+nml_params:
+  start: '1980-04-01 00:00:00'
+  end: '2016-01-01 00:00:00'
+  dt: 3600
+  timezone: -6
+  nsave: 24
+  

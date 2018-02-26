@@ -2,17 +2,16 @@
 clean_universal <- function(df, base_model_cfg, max_depth) {
   cfg <- read_yaml(base_model_cfg)
   df_clean <- df %>% filter(temp < cfg$max_temp & Depth < max_depth & 
-                       (DateTime > cfg$start_date & DateTime < cfg$end_date)) %>% 
+                       (DateTime > as.Date(cfg$nml_params$start) & DateTime < as.Date(cfg$nml_params$end))) %>% 
     filter(!is.na(temp) & !is.na(Depth) & !is.na(DateTime))
-  
+  return(df_clean)
 }
-
 
 #filter out data for this site from files
 #then get WQP data
 #do universal cleaning + depth filtering based on lake nml max depth
 #dots are cleaned files to look in for this site
-regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
+regroup_data <- function(nhd_id, state_src, state_id, wqp_file, nml, ...) {
   cleaned_files <- lapply(c(...), sc_retrieve, remake_file = "1_data_s3_assimilate.yml")
   wqp_file <- sc_retrieve(wqp_file, remake_file = "1_data_wqp.yml")
   site_data <- data.frame()
@@ -37,8 +36,7 @@ regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
   assert_that(anyDuplicated(site_data[c("DateTime", "Depth")]) == 0)
   
   #get max depth for cleaning
-  nml <- read_nml(nml_file = file.path("2_setup_models/nml", 
-                                       paste0("glm2_", nhd_id, ".nml")))
+  nml <- read_nml(nml)
   max_depth <- get_nml_value(nml, "lake_depth")
   cleaned <- clean_universal(site_data, "lib/cfg/base_model_config.yml",
                              max_depth)
