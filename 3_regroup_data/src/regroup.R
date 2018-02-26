@@ -2,7 +2,7 @@
 clean_universal <- function(df, base_model_cfg, max_depth) {
   cfg <- read_yaml(base_model_cfg)
   df_clean <- df %>% filter(temp < cfg$max_temp & Depth < max_depth & 
-                       (DateTime > as.Date(cfg$nml_params$start) & DateTime < as.Date(cfg$nml_params$end))) %>% 
+                       (DateTime > as.Date(cfg$nml_params$start) & DateTime < as.Date(cfg$nml_params$stop))) %>% 
     filter(!is.na(temp) & !is.na(Depth) & !is.na(DateTime))
   return(df_clean)
 }
