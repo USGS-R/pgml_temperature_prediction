@@ -12,8 +12,9 @@ file_extensions:
 
 sources:
   - 3_regroup_data/src/regroup.R 
+  - 3_regroup_data/src/summary_functions.R
 
-target_default: 3_regroup_data/out/data_summary_plots.pdf
+target_default: summaries
 
 include:
   - 1_data_s3_assimilate.yml
@@ -21,6 +22,10 @@ include:
   - 2_get_model_files.yml
 
 targets:
+  summaries:
+    depends:
+    - 3_regroup_data/out/data_summary_plots.pdf
+    
   {{#targets}}
   3_regroup_data/out/{{nhd}}.rds.ind:
     command: regroup_data(nhd_id = I("{{nhd}}"), state_src = I("{{state_source}}"), 
@@ -34,7 +39,13 @@ targets:
     command: s3_get('3_regroup_data/out/{{nhd}}.rds.ind')
       
   {{/targets}}
-  3_regroup_data/out/data_summary_plots.pdf:
+  3_regroup_data/out/all_data.rds.ind:
     {{#out_files_collapsed}}
-    command: summarize_regrouped({{.}})
+    command: aggregate_all_data(outind = target_name, {{.}})
     {{/out_files_collapsed}}
+  3_regroup_data/out/all_data.rds:
+    command: s3_get('3_regroup_data/out/all_data.rds.ind')
+    
+  3_regroup_data/out/data_summary_plots.pdf:
+    command: data_summary_plots(outfile = target_name,
+                                infile = '3_regroup_data/out/all_data.rds.ind')
