@@ -23,8 +23,10 @@ include:
 
 targets:
   summaries:
+    command: sc_indicate(I('3_regroup_data/regroup_data.ind'))
     depends:
     - 3_regroup_data/out/data_summary_plots.pdf
+    - 3_regroup_data/out/data_summary_table.csv
     
   3_regroup_data/out/nhd_120052238.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052238"), state_src = I("DOW"), 
@@ -132,4 +134,7 @@ targets:
     
   3_regroup_data/out/data_summary_plots.pdf:
     command: data_summary_plots(outfile = target_name,
-                                infile = '3_regroup_data/out/all_data.rds.ind')
+                                inind = '3_regroup_data/out/all_data.rds.ind')
+  3_regroup_data/out/data_summary_table.csv:
+    command: data_summary_csv(outfile = target_name,
+                              inind = '3_regroup_data/out/all_data.rds.ind')

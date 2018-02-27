@@ -24,7 +24,7 @@ targets:
     - 2_get_model_files.yml
     - 2_get_model_files/setup_models.ind
     - 3_regroup_data.yml
-    - 3_regroup_data/out/data_summary_plots.pdf
+    - 3_regroup_data/regroup_data.ind
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -66,7 +66,7 @@ targets:
     depends:
     - lib/crosswalks/lakes_master.csv
     - remake_templates/regroup.template
-  3_regroup_data/out/data_summary_plots.pdf:
+  3_regroup_data/regroup_data.ind:
     command: scmake(remake_file = "3_regroup_data.yml")
     depends:
     - lib/cfg/base_model_config.yml

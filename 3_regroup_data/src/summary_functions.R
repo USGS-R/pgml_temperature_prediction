@@ -23,8 +23,8 @@ aggregate_all_data <- function(outind, ...){
   s3_put(remote_ind = outind, local_source =  as_data_file(outind)) 
 }
 
-data_summary_plots <- function(infile, outfile) {
-  data_file <- sc_retrieve(infile, remake_file = "3_regroup_data.yml")
+data_summary_plots <- function(inind, outfile) {
+  data_file <- sc_retrieve(inind, remake_file = "3_regroup_data.yml")
   all_data <- readRDS(data_file)
   depth_plot <- ggplot(all_data, aes(x = DateTime, y = Depth)) +
     geom_point(size = 0.7) + scale_y_reverse() +
@@ -32,7 +32,11 @@ data_summary_plots <- function(infile, outfile) {
   ggsave(filename = outfile, plot = depth_plot, width = 12, height = 8)
 }
 
-data_summary_csv <- function(infile, outfile) {
-  all_data <- sc_retrieve(infile, remake_file = "3_regroup_data.yml")
-  
+data_summary_csv <- function(inind, outfile) {
+  data_file <- sc_retrieve(inind, remake_file = "3_regroup_data.yml")
+  all_data <- readRDS(data_file)
+  summary <- all_data %>% group_by(nhd_id) %>% summarise(name = unique(Lake), nobs = n(), 
+                                                         start = min(DateTime),
+                                                         end = max(DateTime))
+  write.csv(x = summary, file = outfile, row.names = FALSE)
 }
