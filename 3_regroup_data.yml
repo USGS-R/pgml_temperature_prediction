@@ -134,7 +134,9 @@ targets:
     
   3_regroup_data/out/data_summary_plots.pdf:
     command: data_summary_plots(outfile = target_name,
-                                inind = '3_regroup_data/out/all_data.rds.ind')
+                                inind = '3_regroup_data/out/all_data.rds.ind',
+                                remake_file = '3_regroup_data.yml')
   3_regroup_data/out/data_summary_table.csv:
     command: data_summary_csv(outfile = target_name,
-                              inind = '3_regroup_data/out/all_data.rds.ind')
+                              inind = '3_regroup_data/out/all_data.rds.ind',
+                              remake_file = '3_regroup_data.yml')
