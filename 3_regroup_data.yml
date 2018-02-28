@@ -14,7 +14,7 @@ sources:
   - 3_regroup_data/src/regroup.R 
   - 3_regroup_data/src/summary_functions.R
 
-target_default: summaries
+target_default: observation_summaries
 
 include:
   - 1_data_s3_assimilate.yml
@@ -22,7 +22,7 @@ include:
   - 2_get_model_files.yml
 
 targets:
-  summaries:
+  observation_summaries:
     command: sc_indicate(I('3_regroup_data/regroup_data.ind'))
     depends:
     - 3_regroup_data/out/data_summary_plots.pdf
