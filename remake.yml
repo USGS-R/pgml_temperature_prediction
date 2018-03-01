@@ -8,7 +8,7 @@ packages:
 sources:
   - remake_templates/src/render_s3.R
   - remake_templates/src/render_wqp.R
-  - remake_templates/src/render_setup_models.R
+  - remake_templates/src/render_get_model_files.R
   - remake_templates/src/render_regroup.R
   
 targets:
@@ -21,10 +21,10 @@ targets:
     - 1_data_s3_assimilate/data_s3_assimilate.ind
     - 1_data_wqp.yml
     - 1_data_wqp/data_wqp.ind
-    - 2_setup_models.yml
-    - 2_setup_models/setup_models.ind
+    - 2_get_model_files.yml
+    - 2_get_model_files/setup_models.ind
     - 3_regroup_data.yml
-    - 3_regroup_data/out/data_summary_plots.pdf
+    - 3_regroup_data/regroup_data.ind
     
   1_data_download/data_download.ind:
     command: scmake(remake_file = "1_data_download.yml")
@@ -53,18 +53,20 @@ targets:
   1_data_wqp/data_wqp.ind:
     command: scmake(remake_file = "1_data_wqp.yml")
     
-  2_setup_models.yml:
+  2_get_model_files.yml:
     command: render_setup_models()
     depends:
     - lib/crosswalks/lakes_master.csv
-    - remake_templates/setup_models.template
-  2_setup_models/setup_models.ind:
-    command: scmake(remake_file = "2_setup_models.yml")
+    - remake_templates/get_model_files.template
+  2_get_model_files/setup_models.ind:
+    command: scmake(remake_file = "2_get_model_files.yml")
     
   3_regroup_data.yml:
     command: render_regroup()
     depends:
     - lib/crosswalks/lakes_master.csv
     - remake_templates/regroup.template
-  3_regroup_data/out/data_summary_plots.pdf:
+  3_regroup_data/regroup_data.ind:
     command: scmake(remake_file = "3_regroup_data.yml")
+    depends:
+    - lib/cfg/base_model_config.yml

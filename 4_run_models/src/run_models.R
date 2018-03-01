@@ -1,23 +1,23 @@
-library(glmtools)
-library(GLMr)
-run_model <- function(nhd_id) {
+setup_model_dir <- function(nhd_id, nml_file) {
   #create model directory, change nml values
   #get things from the global config file
   sim_directory <- file.path('4_run_models/out', nhd_id)
-  dir.create(sim_directory)
-  #todo use config params                                                                                                                                                        
+  dir.create(sim_directory, showWarnings = FALSE)
+  baseNML <- read_nml(nml_file)
   base_cfg <- yaml::read_yaml('lib/cfg/base_model_config.yml')
-  baseNML <- read_nml(file.path('2_setup_models/nml',
-                                paste0("glm2_", nhd_id, ".nml")))
-  baseNML <- set_nml(baseNML, 'start', '1980-04-01 00:00:00')
-  baseNML <- set_nml(baseNML, 'stop', '2016-01-01 00:00:00')
-  baseNML <- set_nml(baseNML, 'dt', 3600)
-  baseNML <- set_nml(baseNML, 'timezone', -6)
-  baseNML <- set_nml(baseNML, 'nsave', 24)
-  meteo_from_nml <- file.path('../../../2_setup_models/meteo', paste(nhd_id, "driver.csv",
-                                                                     sep = "_"))
-  baseNML <- set_nml(baseNML, 'meteo_fl', meteo_from_nml)
+  nml_params <- base_cfg$nml_params
+  nml_params$meteo_fl <- file.path('../../../2_setup_models/meteo', paste(nhd_id, "driver.csv",
+                                                                          sep = "_"))
+  for(param in names(nml_params)) {
+    baseNML <- set_nml(glm_nml = baseNML, arg_name = param, 
+                       arg_val = nml_params[[param]])
+  }
   write_nml(baseNML, file.path(sim_directory, "glm2.nml"))
+}
+
+
+run_model <- function(nhd_id) {
+  #
   run_glm(sim_folder = sim_directory)
   
   #only accepts ascii files right now

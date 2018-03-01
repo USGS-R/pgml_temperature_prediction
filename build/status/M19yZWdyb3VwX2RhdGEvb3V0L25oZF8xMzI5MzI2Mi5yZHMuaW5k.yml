@@ -1,0 +1,19 @@
+version: 0.3.0
+name: 3_regroup_data/out/nhd_13293262.rds.ind
+type: file
+hash: fccc1342164ea7e2a26e8baed9b73698
+time: 2018-02-26 17:28:23 UTC
+depends:
+  1_data_wqp/out/nhd_13293262.rds.ind: cdbab69dcf20f33c6c1128f732b8c24e
+  2_get_model_files/nml/glm2_nhd_13293262.nml: 73770f47fdf24500631adb36be6b6ba2
+  1_data_s3_assimilate/out/long_term_ntl.rds.ind: 74d2ae4ec413a2edf565869033c69342
+  1_data_s3_assimilate/out/mendota_daily_buoy.rds.ind: 44c3763c3eec72b65a9ce52e53afba74
+  1_data_s3_assimilate/out/mendota_temps_long.rds.ind: 077813cd74695fae6e4a85bbf6869d13
+  lib/crosswalks/rawfile_to_id_crosswalk.csv: 4c840fa111a7f22b454f9f40b052d54a
+  lib/cfg/base_model_config.yml: 3286ee763b45950e785de09e93b9f7c7
+fixed: 1b6cd2d3f67e8f20430e32101f088efb
+code:
+  functions:
+    clean_universal: 5924306d5b986fa8646bf4e619708f84
+    regroup_data: 0e0d3c5690433bddfb419f97ba1f0be7
+

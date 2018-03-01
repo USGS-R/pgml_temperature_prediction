@@ -12,17 +12,26 @@ file_extensions:
 
 sources:
   - 3_regroup_data/src/regroup.R 
+  - 3_regroup_data/src/summary_functions.R
 
-target_default: 3_regroup_data/out/data_summary_plots.pdf
+target_default: observation_summaries
 
 include:
   - 1_data_s3_assimilate.yml
   - 1_data_wqp.yml
+  - 2_get_model_files.yml
 
 targets:
+  observation_summaries:
+    command: sc_indicate(I('3_regroup_data/regroup_data.ind'))
+    depends:
+    - 3_regroup_data/out/data_summary_plots.pdf
+    - 3_regroup_data/out/data_summary_table.csv
+    
   3_regroup_data/out/nhd_120052238.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052238"), state_src = I("DOW"), 
              state_id = I(c('69084500')), wqp_file = '1_data_wqp/out/nhd_120052238.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_120052238.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -33,6 +42,7 @@ targets:
   3_regroup_data/out/nhd_4817675.rds.ind:
     command: regroup_data(nhd_id = I("nhd_4817675"), state_src = I("DOW"), 
              state_id = I(c('11020300','11020301')), wqp_file = '1_data_wqp/out/nhd_4817675.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_4817675.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -43,6 +53,7 @@ targets:
   3_regroup_data/out/nhd_120052195.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052195"), state_src = I("DOW"), 
              state_id = I(c('39000200')), wqp_file = '1_data_wqp/out/nhd_120052195.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_120052195.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -53,6 +64,7 @@ targets:
   3_regroup_data/out/nhd_2360642.rds.ind:
     command: regroup_data(nhd_id = I("nhd_2360642"), state_src = I("DOW"), 
              state_id = I(c('48000200')), wqp_file = '1_data_wqp/out/nhd_2360642.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_2360642.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -63,6 +75,7 @@ targets:
   3_regroup_data/out/nhd_120052233.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052233"), state_src = I("DOW"), 
              state_id = I(c('69069400')), wqp_file = '1_data_wqp/out/nhd_120052233.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_120052233.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -73,6 +86,7 @@ targets:
   3_regroup_data/out/nhd_120052889.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052889"), state_src = I("DOW"), 
              state_id = I(c('04003501')), wqp_file = '1_data_wqp/out/nhd_120052889.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_120052889.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -83,6 +97,7 @@ targets:
   3_regroup_data/out/nhd_7142570.rds.ind:
     command: regroup_data(nhd_id = I("nhd_7142570"), state_src = I("DOW"), 
              state_id = I(c('69037800','69037801','69037802')), wqp_file = '1_data_wqp/out/nhd_7142570.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_7142570.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -93,6 +108,7 @@ targets:
   3_regroup_data/out/nhd_120052896.rds.ind:
     command: regroup_data(nhd_id = I("nhd_120052896"), state_src = I("DOW"), 
              state_id = I(c('11014700')), wqp_file = '1_data_wqp/out/nhd_120052896.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_120052896.nml",
              '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -103,6 +119,7 @@ targets:
   3_regroup_data/out/nhd_13293262.rds.ind:
     command: regroup_data(nhd_id = I("nhd_13293262"), state_src = I("UWID"), 
              state_id = I(c('ME')), wqp_file = '1_data_wqp/out/nhd_13293262.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_13293262.nml",
              '1_data_s3_assimilate/out/long_term_ntl.rds.ind','1_data_s3_assimilate/out/mendota_daily_buoy.rds.ind','1_data_s3_assimilate/out/mendota_temps_long.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
@@ -110,5 +127,16 @@ targets:
   3_regroup_data/out/nhd_13293262.rds:
     command: s3_get('3_regroup_data/out/nhd_13293262.rds.ind')
       
+  3_regroup_data/out/all_data.rds.ind:
+    command: aggregate_all_data(outind = target_name, '3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind','3_regroup_data/out/nhd_13293262.rds.ind')
+  3_regroup_data/out/all_data.rds:
+    command: s3_get('3_regroup_data/out/all_data.rds.ind')
+    
   3_regroup_data/out/data_summary_plots.pdf:
-    command: summarize_regrouped('3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind','3_regroup_data/out/nhd_13293262.rds.ind')
+    command: data_summary_plots(outfile = target_name,
+                                inind = '3_regroup_data/out/all_data.rds.ind',
+                                remake_file = '3_regroup_data.yml')
+  3_regroup_data/out/data_summary_table.csv:
+    command: data_summary_csv(outfile = target_name,
+                              inind = '3_regroup_data/out/all_data.rds.ind',
+                              remake_file = '3_regroup_data.yml')

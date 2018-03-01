@@ -2,17 +2,16 @@
 clean_universal <- function(df, base_model_cfg, max_depth) {
   cfg <- read_yaml(base_model_cfg)
   df_clean <- df %>% filter(temp < cfg$max_temp & Depth < max_depth & 
-                       (DateTime > cfg$start_date & DateTime < cfg$end_date)) %>% 
+                       (DateTime > as.Date(cfg$nml_params$start) & DateTime < as.Date(cfg$nml_params$stop))) %>% 
     filter(!is.na(temp) & !is.na(Depth) & !is.na(DateTime))
-  
+  return(df_clean)
 }
-
 
 #filter out data for this site from files
 #then get WQP data
 #do universal cleaning + depth filtering based on lake nml max depth
 #dots are cleaned files to look in for this site
-regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
+regroup_data <- function(nhd_id, state_src, state_id, wqp_file, nml, ...) {
   cleaned_files <- lapply(c(...), sc_retrieve, remake_file = "1_data_s3_assimilate.yml")
   wqp_file <- sc_retrieve(wqp_file, remake_file = "1_data_wqp.yml")
   site_data <- data.frame()
@@ -37,8 +36,7 @@ regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
   assert_that(anyDuplicated(site_data[c("DateTime", "Depth")]) == 0)
   
   #get max depth for cleaning
-  nml <- read_nml(nml_file = file.path("2_setup_models/nml", 
-                                       paste0("glm2_", nhd_id, ".nml")))
+  nml <- read_nml(nml)
   max_depth <- get_nml_value(nml, "lake_depth")
   cleaned <- clean_universal(site_data, "lib/cfg/base_model_config.yml",
                              max_depth)
@@ -46,29 +44,3 @@ regroup_data <- function(nhd_id, state_src, state_id, wqp_file, ...) {
   saveRDS(object = cleaned, file = outfile)
   s3_put(remote_ind = as_ind_file(outfile), local_source =  outfile) 
 }
-
-summarize_regrouped <- function(...){
-  files <- lapply(c(...), sc_retrieve, remake_file = "3_regroup_data.yml")
-  #load all the data
-  data_list <- lapply(X = files, readRDS)
-  all_data <- do.call(what = bind_rows, data_list)
-  
-  lake_info <- read.csv("lib/crosswalks/lakes_master.csv",
-                      stringsAsFactors = FALSE) %>% 
-                        mutate(facet_label = paste(Lake, site_id, sep=", "))
-  all_data_n_obs <- all_data %>% group_by(nhd_id) %>% 
-    count(nhd_id) %>% 
-    ungroup() %>% 
-    right_join(lake_info, by = c("nhd_id"= "site_id")) %>% 
-    mutate(n = ifelse(is.na(n), 0, n)) 
-  
-  all_data <- all_data %>%
-    left_join(all_data_n_obs, by = "nhd_id") %>%
-    mutate(facet_label = paste0(facet_label, " (n=", n, ")"))
-  
-  depth_plot <- ggplot(all_data, aes(x = DateTime, y = Depth)) +
-    geom_point(size = 0.7) + scale_y_reverse() +
-    facet_wrap( ~ facet_label, ncol=2)
-  ggsave(file.path('3_regroup_data/out/data_summary_plots.pdf'), depth_plot, width = 12, height = 8)
-}
-
