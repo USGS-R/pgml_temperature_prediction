@@ -28,13 +28,15 @@ message(fileToUse)
 folderPath <- file.path("out", rowToUse$WBIC)
 message(folderPath)
 dir.create(folderPath, recursive = TRUE)
-baseNML <- populate_base_lake_nml(site_id = nhdID, driver = fileToUse, 
+baseNML <- populate_base_lake_nml(site_id = nhdID, driver = fileToUse,
                                   kd = get_kd_avg(nhdID, default.if.null = TRUE)$kd_avg)
 
 #set num layers based on depth
 min_thick <- get_nml_value(baseNML, arg_name = "min_layer_thick")                                                                 
 max_depth <- get_nml_value(baseNML, arg_name = "lake_depth")
-max_layers <- ceiling(max_depth/min_thick * 1.1)
+message(max_depth, " max depth")
+max_layers <- max(ceiling((max_depth/min_thick) * 1.1), 200)
+
 baseNML <- set_nml(baseNML, 'max_layers', max_layers)
 message(max_layers)
 
