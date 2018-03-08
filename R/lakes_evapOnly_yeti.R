@@ -6,7 +6,7 @@ library(tools)
 library(data.table)
 
 
-run_lake_evap <- function(task_id_if_NA) {
+run_lake_evap <- function(task_id_if_NA, glm_output = FALSE) {
 #run model for all driver files, save evaporation 
 
 #need to loop over drivers, some kind of cross-ref scheme
@@ -18,14 +18,20 @@ if(is.na(taskID)) {
 
 message(taskID)
 
-crossWalk <- fread('siteInputs4_1_list.csv')
+crossWalk <- fread('/cxfs/projects/usgs/water/owi/booth-lakes/siteInputs4_1_list.csv')
 rowToUse <- crossWalk[taskID,]
 rowToUse$WBIC <- paste("WBIC", rowToUse$WBIC, sep = "_")
 nhdID <- rowToUse$NHD
-fileToUse <- file.path("../../siteInputs4_1", paste0(rowToUse$WBIC, ".csv"))
+
+#make sure there is z max available
+zmax <- get_zmax(nhdID)
+stopifnot(is.finite(zmax))
+
+fileToUse <- file.path("/cxfs/projects/usgs/water/owi/booth-lakes/siteInputs4_1", paste0(rowToUse$WBIC, ".csv"))
 message(fileToUse)
 
-folderPath <- file.path("out", rowToUse$WBIC)
+localScratch <- Sys.getenv('LOCAL_SCRATCH', unset="out")
+folderPath <- file.path(localScratch, rowToUse$WBIC)
 message(folderPath)
 dir.create(folderPath, recursive = TRUE)
 baseNML <- populate_base_lake_nml(site_id = nhdID, driver = fileToUse,
@@ -45,11 +51,16 @@ baseNML <- set_nml(baseNML, 'stop', '2015-12-31 00:00:00')
 baseNML <- set_nml(baseNML, 'nsave', 1)
 baseNML <- set_nml(baseNML, 'dt', 3600)
 write_nml(baseNML, file.path(folderPath, "glm2.nml"))
-run_glm(sim_folder = folderPath)
+run_glm(sim_folder = folderPath, verbose = glm_output)
 evap <- get_evaporation(file.path(folderPath, 'output.nc'))
-#TODO: summarize evap to daily
+#summarize evap to daily
+evap_daily <- evap %>% mutate(date = as.Date(DateTime)) %>% group_by(date) %>% summarize(daily_evap = sum(`evaporation(mm/d)`))
+if(nrow(evap_daily) < 24800) {
+	stop("less than 24800 evap values")
+}
+ 
 fwrite(x = evap, file = file.path(folderPath, paste(rowToUse$WBIC,'evap.csv', sep = "_")))
-#TODO: check if evap exists, isn't empty, has full date range
+#check if evap exists, isn't empty, has full date range
 
 message(paste("finished", nhdID))
 }
