@@ -6,7 +6,7 @@ library(tools)
 library(data.table)
 
 
-run_lake_evap <- function(task_id_if_NA, glm_output = FALSE) {
+run_lake_evap <- function(task_id_if_NA, glm_output = TRUE) {
 #run model for all driver files, save evaporation 
 
 #need to loop over drivers, some kind of cross-ref scheme
@@ -27,7 +27,7 @@ nhdID <- rowToUse$NHD
 zmax <- get_zmax(nhdID)
 stopifnot(is.finite(zmax))
 
-fileToUse <- file.path("/cxfs/projects/usgs/water/owi/booth-lakes/siteInputs4_1", paste0(rowToUse$WBIC, ".csv"))
+fileToUse <- file.path("/cxfs/projects/usgs/water/owi/booth-lakes/siteInputs_rain_meters", paste0(rowToUse$WBIC, ".csv"))
 message(fileToUse)
 
 localScratch <- Sys.getenv('LOCAL_SCRATCH', unset="out")
@@ -41,7 +41,7 @@ baseNML <- populate_base_lake_nml(site_id = nhdID, driver = fileToUse,
 min_thick <- get_nml_value(baseNML, arg_name = "min_layer_thick")                                                                 
 max_depth <- get_nml_value(baseNML, arg_name = "lake_depth")
 message(max_depth, " max depth")
-max_layers <- max(ceiling((max_depth/min_thick) * 1.1), 200)
+max_layers <- ceiling((max_depth/min_thick) * 1.1)
 
 baseNML <- set_nml(baseNML, 'max_layers', max_layers)
 message(max_layers)
@@ -55,8 +55,8 @@ run_glm(sim_folder = folderPath, verbose = glm_output)
 evap <- get_evaporation(file.path(folderPath, 'output.nc'))
 #summarize evap to daily
 evap_daily <- evap %>% mutate(date = as.Date(DateTime)) %>% group_by(date) %>% summarize(daily_evap = sum(`evaporation(mm/d)`))
-if(nrow(evap_daily) < 24800) {
-	stop("less than 24800 evap values")
+if(nrow(evap_daily) < 24836) {
+	stop("less than 24836 evap values")
 }
  
 fwrite(x = evap, file = file.path(folderPath, paste(rowToUse$WBIC,'evap.csv', sep = "_")))
