@@ -54,13 +54,19 @@ write_nml(baseNML, file.path(folderPath, "glm2.nml"))
 run_glm(sim_folder = folderPath, verbose = glm_output)
 evap <- get_evaporation(file.path(folderPath, 'output.nc'))
 #summarize evap to daily
+#currently only used to check num days
+#TODO: do time zone conversion here, so summarize_evap script can be folded in 
 evap_daily <- evap %>% mutate(date = as.Date(DateTime)) %>% group_by(date) %>% summarize(daily_evap = sum(`evaporation(mm/d)`))
-if(nrow(evap_daily) < 24836) {
+
+start <- get_nml_value(baseNML, 'start')
+end <- get_nml_value(baseNML, 'stop')
+expected_days <- as.Date(end) - as.Date(start)
+
+if(nrow(evap_daily) < expected_days) {
 	stop("less than 24836 evap values")
 }
  
 fwrite(x = evap, file = file.path(folderPath, paste(rowToUse$WBIC,'evap.csv', sep = "_")))
-#check if evap exists, isn't empty, has full date range
 
 message(paste("finished", nhdID))
 }
