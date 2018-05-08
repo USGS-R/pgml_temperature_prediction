@@ -1,0 +1,10 @@
+version: 0.3.0
+name: 1_data_s3/out/MPCA_temp_data_all.tsv.ind
+type: file
+hash: fbc3605e6b452ba19db798be6da13c2a
+time: 2018-02-14 21:02:16 UTC
+depends: {}
+fixed: 66efd43d42e6449612b2045e1cc00442
+code:
+  functions: {}
+

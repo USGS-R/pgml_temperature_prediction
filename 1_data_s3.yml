@@ -1,0 +1,40 @@
+packages:
+  - scipiper
+
+file_extensions:
+  - ind
+
+include:
+  - 1_data_download.yml
+
+target_default: all_s3
+
+targets:
+  all_s3:  #this should be the final things
+    command: sc_indicate(I("1_data_s3/data_s3.ind"))
+    depends:
+    - lib/cfg/s3_config.yml
+    - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind
+    - 1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt
+    - 1_data_s3/out/MPCA_temp_data_all.tsv.ind
+    - 1_data_s3/out/MPCA_temp_data_all.tsv
+    - 1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind
+    - 1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb
+  lib/cfg/s3_config.yml:
+    command: s3_config(config_file=target_name, bucket = I('pgml-temperature-prediction'))
+    
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind:
+    command: s3_confirm_posted(ind_file = target_name)
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt:
+    command: s3_get('1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind')
+    
+  1_data_s3/out/MPCA_temp_data_all.tsv.ind:
+    command: s3_confirm_posted(ind_file = target_name)
+  1_data_s3/out/MPCA_temp_data_all.tsv:
+    command: s3_get('1_data_s3/out/MPCA_temp_data_all.tsv.ind')
+    
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind:
+    command: s3_confirm_posted(ind_file = target_name)
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb:
+    command: s3_get('1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind')
+    

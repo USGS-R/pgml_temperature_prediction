@@ -1,0 +1,72 @@
+packages:
+  - scipiper
+  - whisker
+  - assertthat
+  - dplyr
+  - tools
+  
+sources:
+  - remake_templates/src/render_s3.R
+  - remake_templates/src/render_wqp.R
+  - remake_templates/src/render_get_model_files.R
+  - remake_templates/src/render_regroup.R
+  
+targets:
+  all:
+    depends:
+    - 1_data_download/data_download.ind
+    - 1_data_s3.yml
+    - 1_data_s3/data_s3.ind
+    - 1_data_s3_assimilate.yml
+    - 1_data_s3_assimilate/data_s3_assimilate.ind
+    - 1_data_wqp.yml
+    - 1_data_wqp/data_wqp.ind
+    - 2_get_model_files.yml
+    - 2_get_model_files/setup_models.ind
+    - 3_regroup_data.yml
+    - 3_regroup_data/regroup_data.ind
+    
+  1_data_download/data_download.ind:
+    command: scmake(remake_file = "1_data_download.yml")
+  
+  1_data_s3.yml:
+    command: render_s3()
+    depends: 
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/s3.template
+  1_data_s3/data_s3.ind:
+    command: scmake(remake_file = "1_data_s3.yml")
+    
+  1_data_s3_assimilate.yml:
+    command: render_s3_assimilate()
+    depends:
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/s3_assimilate.template
+  1_data_s3_assimilate/data_s3_assimilate.ind:
+    command: scmake(remake_file = "1_data_s3_assimilate.yml")
+    
+  1_data_wqp.yml:
+    command: render_wqp()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/wqp.template
+  1_data_wqp/data_wqp.ind:
+    command: scmake(remake_file = "1_data_wqp.yml")
+    
+  2_get_model_files.yml:
+    command: render_setup_models()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/get_model_files.template
+  2_get_model_files/setup_models.ind:
+    command: scmake(remake_file = "2_get_model_files.yml")
+    
+  3_regroup_data.yml:
+    command: render_regroup()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/regroup.template
+  3_regroup_data/regroup_data.ind:
+    command: scmake(remake_file = "3_regroup_data.yml")
+    depends:
+    - lib/cfg/base_model_config.yml

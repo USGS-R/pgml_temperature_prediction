@@ -1,0 +1,31 @@
+packages:
+  - scipiper
+  - dplyr
+  - yaml
+  - dataRetrieval
+
+file_extensions:
+  - ind
+  
+sources:
+  - 1_data_wqp/src/get_wqp.R
+
+target_default: all_wqp
+
+targets:
+  all_wqp:
+    command: sc_indicate(I('1_data_wqp/data_wqp.ind'))
+    depends:
+    {{#nhd_ids}}
+    - 1_data_wqp/out/{{.}}.rds.ind
+    {{/nhd_ids}}
+  {{#nhd_ids}}
+  1_data_wqp/out/{{.}}.rds.ind:
+    command: wqp_lookup_retrieve(outind = target_name, nhd = I("{{.}}"))
+    depends: 
+    - lib/crosswalks/lakes_master.csv
+    - lib/cfg/wqp_config.yml
+  1_data_wqp/out/{{.}}.rds:
+    command: s3_get('1_data_wqp/out/{{.}}.rds.ind')
+    
+  {{/nhd_ids}}

@@ -1,0 +1,18 @@
+version: 0.3.0
+name: 3_assimilate_data/out/nhd_120052896.rds.ind
+type: file
+hash: e319dbe8c98fc59d412db4fa29996c3e
+time: 2018-02-16 21:34:29 UTC
+depends:
+  1_data_wqp/out/nhd_120052896.rds.ind: 2100fc80deeea0b6f233a0cc7765d88f
+  1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind: 3b03c0f12042072784a6096deb91f4da
+  1_data_s3_cleaned/out/MPCA_temp_data_all.rds.ind: 56eaeb1bb53178126243e896fc7a36db
+  1_data_s3_cleaned/out/URL_Temp_Logger_2006_to_2017.rds.ind: 66e61d80281059bfd595452d30c506ed
+  lib/crosswalks/rawfile_to_id_crosswalk.csv: e7533d14b097a6d7546ca0bb7cb8d902
+  lib/cfg/base_model_config.yml: a3b35bf2ebfd33b9e2d0acdcb53e713a
+fixed: b0dcff60b2c22c61ba1d118841fe90a1
+code:
+  functions:
+    assimilate_data: 90054d377769fb5967cecdb0913a2b41
+    clean_universal: fe381ef6c170f785313a54dd101530db
+

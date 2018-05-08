@@ -1,0 +1,8 @@
+characteristicName: ["Temperature, sample", "Temperature, water","Temperature"]
+
+columnsToKeep: ["ActivityStartDate","ActivityStartTime.Time","ActivityStartTime.TimeZoneCode","ActivityBottomDepthHeightMeasure.MeasureValue","ActivityBottomDepthHeightMeasure.MeasureUnitCode","MonitoringLocationIdentifier","ResultMeasureValue","ResultMeasure.MeasureUnitCode"]      
+
+# WQP startDateLo and startDateHi    
+startDate: "1980-01-01"
+endDate: "2016-10-01"
+

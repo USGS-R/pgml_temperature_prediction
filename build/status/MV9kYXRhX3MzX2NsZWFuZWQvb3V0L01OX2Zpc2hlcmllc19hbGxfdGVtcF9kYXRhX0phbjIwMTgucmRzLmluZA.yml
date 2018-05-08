@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 1_data_s3_cleaned/out/MN_fisheries_all_temp_data_Jan2018.rds.ind
+type: file
+hash: 3b03c0f12042072784a6096deb91f4da
+time: 2018-02-16 21:33:55 UTC
+depends:
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind: 9ebc8995aca5d8392faa6f214e568406
+fixed: 9e86db65527f0a86329870ef0615c44e
+code:
+  functions:
+    parse_MN_fisheries_all_temp_data_Jan2018: 1cbab04180af713c7f59e2710cfe3a97
+

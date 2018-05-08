@@ -1,0 +1,18 @@
+packages:
+  - GLMr
+  - glmtools
+  
+sources:
+  - 4_run_models/src/run_models.R
+  
+include:
+  - 2_get_model_files.yml
+  
+#default_target: model_summary.pdf
+
+targets:
+  {{#nhd}}
+  4_run_models/out/{{.}}/glm2.nml:
+    command: setup_model_dir(nhd_id = I('{{.}}'), nml = "2_get_model_files/nml/glm2_{{.}}.nml")
+
+  {{/nhd}}
