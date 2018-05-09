@@ -6,9 +6,10 @@ shellLog/*
 .Ruserdata
 out/*
 pest/pMaster_*
-1_all_raw_data/out/*
-1_all_raw_data/in/*
-!/1_data_s3/out/*.ind
+/1_all_raw_data/out/*
+/1_all_raw_data/in/*
+!/1_all_raw_data/out/*.ind
+!/1_all_raw_data/in/*.ind
 *.rds
 !/lib/crosswalks/*
 4_run_models/out/*
