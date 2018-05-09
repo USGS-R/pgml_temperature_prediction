@@ -11,6 +11,8 @@ pest/pMaster_*
 *.rds
 !/lib/crosswalks/*
 4_run_models/out/*
-1_data_download/out/*
+1_public_data_download/out/*
 2_get_model_files/meteo/*.csv
-
+.httr-oauth
+*.DS_Store
+*.remake

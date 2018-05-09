@@ -2,10 +2,10 @@ version: 0.3.0
 name: 1_data_s3/out/long_term_ntl.csv.ind
 type: file
 hash: 4fef2974e4db9176ae46a2f06baab26f
-time: 2018-02-20 16:10:37 UTC
+time: 2018-05-09 17:30:29 UTC
 depends: {}
 fixed: 5a50e01f736bb40bfa27d51260d87d9c
 code:
   functions:
-    download_and_indicate: e36b6ef6e05fce855b775093e71c4324
+    download_and_indicate: e8dec6e689cbbf4b4edc590899b4fd86
 

@@ -1,0 +1,11 @@
+version: 0.3.0
+name: 1_all_raw_data/out/long_term_ntl.csv.ind
+type: file
+hash: 4fef2974e4db9176ae46a2f06baab26f
+time: 2018-05-09 17:57:53 UTC
+depends: {}
+fixed: 590a3d0b58df4b9d7ff64124c893f2e6
+code:
+  functions:
+    download_and_indicate: e8dec6e689cbbf4b4edc590899b4fd86
+

@@ -1,0 +1,11 @@
+version: 0.3.0
+name: 1_all_raw_data/out/mendota_daily_buoy.csv.ind
+type: file
+hash: 20c7a7553cef73c6bcdf5504729c37c9
+time: 2018-05-09 17:58:01 UTC
+depends: {}
+fixed: 9e4f8d8f5af0f694ec4aecfcd7f38ba5
+code:
+  functions:
+    download_and_indicate: e8dec6e689cbbf4b4edc590899b4fd86
+

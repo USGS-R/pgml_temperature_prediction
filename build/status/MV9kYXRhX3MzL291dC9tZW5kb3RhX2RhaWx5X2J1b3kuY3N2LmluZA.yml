@@ -2,10 +2,10 @@ version: 0.3.0
 name: 1_data_s3/out/mendota_daily_buoy.csv.ind
 type: file
 hash: 20c7a7553cef73c6bcdf5504729c37c9
-time: 2018-02-20 16:10:40 UTC
+time: 2018-05-09 17:30:36 UTC
 depends: {}
 fixed: 22333332e2e4d41970daff17016d81bb
 code:
   functions:
-    download_and_indicate: e36b6ef6e05fce855b775093e71c4324
+    download_and_indicate: e8dec6e689cbbf4b4edc590899b4fd86
 

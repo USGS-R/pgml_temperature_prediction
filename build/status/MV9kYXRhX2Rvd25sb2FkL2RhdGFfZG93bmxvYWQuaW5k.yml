@@ -1,0 +1,11 @@
+version: 0.3.0
+name: 1_data_download/data_download.ind
+type: file
+hash: 12a32ffba9c665ac41a50f68eb83c090
+time: 2018-05-09 17:30:43 UTC
+depends:
+  1_data_download.yml: 62b9c42e1dde79cc239992577e2ee590
+fixed: ~
+code:
+  functions: {}
+
