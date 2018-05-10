@@ -1,8 +1,9 @@
 
 include: 
-  0_render_yml.yml #make sure the remake files are up to date before we do anything
-  
+  - 0_render_yml.yml #make sure the remake files are up to date before we do anything
+   
 targets:
   all: 
     depends:
       - render_all
+    

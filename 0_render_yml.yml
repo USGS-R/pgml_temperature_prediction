@@ -16,7 +16,7 @@ target_default: render_all
 targets:
   render_all:
     depends:
-    - 1_data_s3.yml
+    - 1_all_raw_data.yml
     - 1_data_s3_assimilate.yml
     - 1_data_wqp.yml
     - 2_get_model_files.yml
@@ -26,7 +26,7 @@ targets:
     command: render_all_raw_data(target_name)
     depends: 
     - lib/crosswalks/rawfile_to_id_crosswalk.csv
-    - remake_templates/s3.template
+    - remake_templates/all_raw_data.template
  
   1_data_s3_assimilate.yml:
     command: render_s3_assimilate()
@@ -39,8 +39,6 @@ targets:
     depends:
     - lib/crosswalks/lakes_master.csv
     - remake_templates/wqp.template
-  1_data_wqp/data_wqp.ind:
-    command: scmake(remake_file = "1_data_wqp.yml")
     
   2_get_model_files.yml:
     command: render_setup_models()

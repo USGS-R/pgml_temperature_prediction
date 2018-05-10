@@ -14,18 +14,28 @@ targets:
     - 1_all_raw_data/out/long_term_ntl.csv.ind
     - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
     - 1_all_raw_data/out/mendota_temps_long.csv.ind
-    {{#targets}}
-    - 1_all_raw_data/in/{{.}}.ind
-    - 1_all_raw_data/in/{{.}}
-    {{/targets}}
+    - 1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind
+    - 1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt
+    - 1_all_raw_data/in/MPCA_temp_data_all.tsv.ind
+    - 1_all_raw_data/in/MPCA_temp_data_all.tsv
+    - 1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb.ind
+    - 1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb
     
-  {{#targets}}
-  1_all_raw_data/out/{{.}}.ind:
+  1_all_raw_data/out/MN_fisheries_all_temp_data_Jan2018.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/out/{{.}}:
-    command: gd_get('1_all_raw_data/in/{{.}}.ind')
+  1_all_raw_data/out/MN_fisheries_all_temp_data_Jan2018.txt:
+    command: gd_get('1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind')
     
-  {{/targets}}
+  1_all_raw_data/out/MPCA_temp_data_all.tsv.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/out/MPCA_temp_data_all.tsv:
+    command: gd_get('1_all_raw_data/in/MPCA_temp_data_all.tsv.ind')
+    
+  1_all_raw_data/out/URL_Temp_Logger_2006_to_2017.accdb.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/out/URL_Temp_Logger_2006_to_2017.accdb:
+    command: gd_get('1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb.ind')
+    
   
   1_all_raw_data/out/long_term_ntl.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/long_term_ntl.csv"), 
@@ -38,4 +48,3 @@ targets:
   1_all_raw_data/out/mendota_temps_long.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/mendota_temps_long.csv"),
               url = I("https://lter.limnology.wisc.edu/sites/default/files/data/Lake_Mendota_temps_long.csv"))
-
