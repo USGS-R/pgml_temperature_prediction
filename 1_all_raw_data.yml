@@ -22,12 +22,12 @@ targets:
     - 1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb
     - 1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx.ind
     - 1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx
-    - 1_all_raw_data/in/Vermilion Logger 2014.csv.ind
-    - 1_all_raw_data/in/Vermilion Logger 2014.csv
+    - 1_all_raw_data/in/Vermilion_Logger_2014.csv.ind
+    - 1_all_raw_data/in/Vermilion_Logger_2014.csv
     - 1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx.ind
     - 1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx
-    - 1_all_raw_data/in/Temp Logger Data 2015.xlsx.ind
-    - 1_all_raw_data/in/Temp Logger Data 2015.xlsx
+    - 1_all_raw_data/in/Temp_Logger_Data_2015.xlsx.ind
+    - 1_all_raw_data/in/Temp_Logger_Data_2015.xlsx
     - 1_all_raw_data/in/Sand_Bay_All_2017.xlsx.ind
     - 1_all_raw_data/in/Sand_Bay_All_2017.xlsx
     - 1_all_raw_data/in/Sand_Bay_All_2016.xlsx.ind
@@ -38,32 +38,32 @@ targets:
     - 1_all_raw_data/in/Sand_Bay_all_2014.xlsx
     - 1_all_raw_data/in/Sand_Bay_all_2013.xlsx.ind
     - 1_all_raw_data/in/Sand_Bay_all_2013.xlsx
-    - 1_all_raw_data/in/Open Water Logger 2013.csv.ind
-    - 1_all_raw_data/in/Open Water Logger 2013.csv
+    - 1_all_raw_data/in/Open_Water_Logger_2013.csv.ind
+    - 1_all_raw_data/in/Open_Water_Logger_2013.csv
     - 1_all_raw_data/in/ML_observed_temperatures.txt.ind
     - 1_all_raw_data/in/ML_observed_temperatures.txt
     - 1_all_raw_data/in/LotW_WQ_Gretchen_H.xlsx.ind
     - 1_all_raw_data/in/LotW_WQ_Gretchen_H.xlsx
-    - 1_all_raw_data/in/Logger Temps 2011 Open Water.xlsx.ind
-    - 1_all_raw_data/in/Logger Temps 2011 Open Water.xlsx
-    - 1_all_raw_data/in/Logger Temps 2010 Open Water.csv.ind
-    - 1_all_raw_data/in/Logger Temps 2010 Open Water.csv
-    - 1_all_raw_data/in/Logger Temps 2009 Open Water.csv.ind
-    - 1_all_raw_data/in/Logger Temps 2009 Open Water.csv
-    - 1_all_raw_data/in/Logger Temps 2009 Joes Dock.csv.ind
-    - 1_all_raw_data/in/Logger Temps 2009 Joes Dock.csv
+    - 1_all_raw_data/in/Logger_Temps_2011_Open_Water.xlsx.ind
+    - 1_all_raw_data/in/Logger_Temps_2011_Open_Water.xlsx
+    - 1_all_raw_data/in/Logger_Temps_2010_Open_Water.csv.ind
+    - 1_all_raw_data/in/Logger_Temps_2010_Open_Water.csv
+    - 1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv.ind
+    - 1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv
+    - 1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv.ind
+    - 1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv
     - 1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind
     - 1_all_raw_data/in/Leech_Main_Basin_11020301.csv
-    - 1_all_raw_data/in/Leech_Kabekona Bay_11020302.csv.ind
-    - 1_all_raw_data/in/Leech_Kabekona Bay_11020302.csv
+    - 1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind
+    - 1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv
     - 1_all_raw_data/in/Lake_Vermilion_2016.csv.ind
     - 1_all_raw_data/in/Lake_Vermilion_2016.csv
     - 1_all_raw_data/in/Joes_Dock_2013.csv.ind
     - 1_all_raw_data/in/Joes_Dock_2013.csv
-    - 1_all_raw_data/in/Joes Dock Logger 2012.xlsx.ind
-    - 1_all_raw_data/in/Joes Dock Logger 2012.xlsx
-    - 1_all_raw_data/in/Cass_lake_emperature Logger Database 2008 to present.accdb.ind
-    - 1_all_raw_data/in/Cass_lake_emperature Logger Database 2008 to present.accdb
+    - 1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx.ind
+    - 1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx
+    - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind
+    - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb
     
   1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -85,20 +85,20 @@ targets:
   1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx:
     command: gd_get('1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx.ind')
     
-  1_all_raw_data/in/Vermilion Logger 2014.csv.ind:
+  1_all_raw_data/in/Vermilion_Logger_2014.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Vermilion Logger 2014.csv:
-    command: gd_get('1_all_raw_data/in/Vermilion Logger 2014.csv.ind')
+  1_all_raw_data/in/Vermilion_Logger_2014.csv:
+    command: gd_get('1_all_raw_data/in/Vermilion_Logger_2014.csv.ind')
     
   1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx:
     command: gd_get('1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx.ind')
     
-  1_all_raw_data/in/Temp Logger Data 2015.xlsx.ind:
+  1_all_raw_data/in/Temp_Logger_Data_2015.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Temp Logger Data 2015.xlsx:
-    command: gd_get('1_all_raw_data/in/Temp Logger Data 2015.xlsx.ind')
+  1_all_raw_data/in/Temp_Logger_Data_2015.xlsx:
+    command: gd_get('1_all_raw_data/in/Temp_Logger_Data_2015.xlsx.ind')
     
   1_all_raw_data/in/Sand_Bay_All_2017.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -125,10 +125,10 @@ targets:
   1_all_raw_data/in/Sand_Bay_all_2013.xlsx:
     command: gd_get('1_all_raw_data/in/Sand_Bay_all_2013.xlsx.ind')
     
-  1_all_raw_data/in/Open Water Logger 2013.csv.ind:
+  1_all_raw_data/in/Open_Water_Logger_2013.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Open Water Logger 2013.csv:
-    command: gd_get('1_all_raw_data/in/Open Water Logger 2013.csv.ind')
+  1_all_raw_data/in/Open_Water_Logger_2013.csv:
+    command: gd_get('1_all_raw_data/in/Open_Water_Logger_2013.csv.ind')
     
   1_all_raw_data/in/ML_observed_temperatures.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -140,35 +140,35 @@ targets:
   1_all_raw_data/in/LotW_WQ_Gretchen_H.xlsx:
     command: gd_get('1_all_raw_data/in/LotW_WQ_Gretchen_H.xlsx.ind')
     
-  1_all_raw_data/in/Logger Temps 2011 Open Water.xlsx.ind:
+  1_all_raw_data/in/Logger_Temps_2011_Open_Water.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Logger Temps 2011 Open Water.xlsx:
-    command: gd_get('1_all_raw_data/in/Logger Temps 2011 Open Water.xlsx.ind')
+  1_all_raw_data/in/Logger_Temps_2011_Open_Water.xlsx:
+    command: gd_get('1_all_raw_data/in/Logger_Temps_2011_Open_Water.xlsx.ind')
     
-  1_all_raw_data/in/Logger Temps 2010 Open Water.csv.ind:
+  1_all_raw_data/in/Logger_Temps_2010_Open_Water.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Logger Temps 2010 Open Water.csv:
-    command: gd_get('1_all_raw_data/in/Logger Temps 2010 Open Water.csv.ind')
+  1_all_raw_data/in/Logger_Temps_2010_Open_Water.csv:
+    command: gd_get('1_all_raw_data/in/Logger_Temps_2010_Open_Water.csv.ind')
     
-  1_all_raw_data/in/Logger Temps 2009 Open Water.csv.ind:
+  1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Logger Temps 2009 Open Water.csv:
-    command: gd_get('1_all_raw_data/in/Logger Temps 2009 Open Water.csv.ind')
+  1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv:
+    command: gd_get('1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv.ind')
     
-  1_all_raw_data/in/Logger Temps 2009 Joes Dock.csv.ind:
+  1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Logger Temps 2009 Joes Dock.csv:
-    command: gd_get('1_all_raw_data/in/Logger Temps 2009 Joes Dock.csv.ind')
+  1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv:
+    command: gd_get('1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv.ind')
     
   1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Leech_Main_Basin_11020301.csv:
     command: gd_get('1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind')
     
-  1_all_raw_data/in/Leech_Kabekona Bay_11020302.csv.ind:
+  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Leech_Kabekona Bay_11020302.csv:
-    command: gd_get('1_all_raw_data/in/Leech_Kabekona Bay_11020302.csv.ind')
+  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv:
+    command: gd_get('1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind')
     
   1_all_raw_data/in/Lake_Vermilion_2016.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -180,15 +180,15 @@ targets:
   1_all_raw_data/in/Joes_Dock_2013.csv:
     command: gd_get('1_all_raw_data/in/Joes_Dock_2013.csv.ind')
     
-  1_all_raw_data/in/Joes Dock Logger 2012.xlsx.ind:
+  1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Joes Dock Logger 2012.xlsx:
-    command: gd_get('1_all_raw_data/in/Joes Dock Logger 2012.xlsx.ind')
+  1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx:
+    command: gd_get('1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx.ind')
     
-  1_all_raw_data/in/Cass_lake_emperature Logger Database 2008 to present.accdb.ind:
+  1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Cass_lake_emperature Logger Database 2008 to present.accdb:
-    command: gd_get('1_all_raw_data/in/Cass_lake_emperature Logger Database 2008 to present.accdb.ind')
+  1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb:
+    command: gd_get('1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind')
     
   
   1_all_raw_data/out/long_term_ntl.csv.ind:
