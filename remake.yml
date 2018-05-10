@@ -5,16 +5,18 @@ packages:
   - dplyr
   - tools
   
-sources:
+sources: #mustache templates for the step remake files
   - remake_templates/src/render_s3.R
   - remake_templates/src/render_wqp.R
   - remake_templates/src/render_get_model_files.R
   - remake_templates/src/render_regroup.R
-  
+ 
+include: 
+    - 1_public_data_download
+    
 targets:
   all:
     depends:
-    - 1_public_data_download/public_data_download.ind
     - 1_data_s3.yml
     - 1_data_s3/data_s3.ind
     - 1_data_s3_assimilate.yml
@@ -26,17 +28,14 @@ targets:
     - 3_regroup_data.yml
     - 3_regroup_data/regroup_data.ind
     
-  1_public_data_download/public_data_download.ind:
-    command: scmake(remake_file = "1_public_data_download.yml")
-  
-  1_data_s3.yml:
+  1_all_raw_data.yml:
     command: render_s3()
     depends: 
     - lib/crosswalks/rawfile_to_id_crosswalk.csv
     - remake_templates/s3.template
-  1_data_s3/data_s3.ind:
-    command: scmake(remake_file = "1_data_s3.yml")
-    
+ 
+ 
+ 
   1_data_s3_assimilate.yml:
     command: render_s3_assimilate()
     depends:

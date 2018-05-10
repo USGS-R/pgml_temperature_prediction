@@ -2,19 +2,18 @@
 
 packages:
   - scipiper
-
-file_extensions:
-  - ind
   
 sources:
   - 1_public_data_download/src/download_and_indicate.R
   
+target_default: all_public_data_download
+  
 targets:
-  all:
+  all_public_data_download:
     depends:
-    - 1_all_raw_data/out/long_term_ntl.csv.ind
-    - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
-    - 1_all_raw_data/out/mendota_temps_long.csv.ind
+      - 1_all_raw_data/out/long_term_ntl.csv.ind
+      - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
+      - 1_all_raw_data/out/mendota_temps_long.csv.ind
     
   1_all_raw_data/out/long_term_ntl.csv.ind:
     command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/long_term_ntl.csv"), 
