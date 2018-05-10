@@ -9,7 +9,7 @@ file_extensions:
 sources:
   - 1_public_data_download/src/download_and_indicate.R
   
-target_default: all_download
+target_default: 1_public_data_download/public_data_download.ind
   
 targets:
   1_public_data_download/public_data_download.ind:
