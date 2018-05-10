@@ -9,11 +9,8 @@ file_extensions:
 sources:
   - 1_public_data_download/src/download_and_indicate.R
   
-target_default: 1_public_data_download/public_data_download.ind
-  
 targets:
-  1_public_data_download/public_data_download.ind:
-    command: sc_indicate(target_name)
+  all:
     depends:
     - 1_all_raw_data/out/long_term_ntl.csv.ind
     - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
