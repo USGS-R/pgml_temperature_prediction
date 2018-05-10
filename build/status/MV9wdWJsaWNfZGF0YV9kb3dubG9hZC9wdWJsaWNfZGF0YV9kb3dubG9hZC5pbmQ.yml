@@ -1,0 +1,11 @@
+version: 0.3.0
+name: 1_public_data_download/public_data_download.ind
+type: file
+hash: c86244d8600a1fc5ddaa8a0b62e92e21
+time: 2018-05-09 17:58:10 UTC
+depends:
+  1_public_data_download.yml: 44a11464ddb254f89ed66735c9eaa7e6
+fixed: ~
+code:
+  functions: {}
+

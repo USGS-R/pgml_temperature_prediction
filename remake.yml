@@ -14,7 +14,7 @@ sources:
 targets:
   all:
     depends:
-    - 1_data_download/data_download.ind
+    - 1_public_data_download/public_data_download.ind
     - 1_data_s3.yml
     - 1_data_s3/data_s3.ind
     - 1_data_s3_assimilate.yml
@@ -26,8 +26,8 @@ targets:
     - 3_regroup_data.yml
     - 3_regroup_data/regroup_data.ind
     
-  1_data_download/data_download.ind:
-    command: scmake(remake_file = "1_data_download.yml")
+  1_public_data_download/public_data_download.ind:
+    command: scmake(remake_file = "1_public_data_download.yml")
   
   1_data_s3.yml:
     command: render_s3()
@@ -44,6 +44,7 @@ targets:
     - remake_templates/s3_assimilate.template
   1_data_s3_assimilate/data_s3_assimilate.ind:
     command: scmake(remake_file = "1_data_s3_assimilate.yml")
+    depends: 1_data_s3/data_s3.ind
     
   1_data_wqp.yml:
     command: render_wqp()
@@ -70,3 +71,4 @@ targets:
     command: scmake(remake_file = "3_regroup_data.yml")
     depends:
     - lib/cfg/base_model_config.yml
+    - 1_data_s3_assimilate/data_s3_assimilate.ind
