@@ -1,10 +1,10 @@
 version: 0.3.0
-name: 1_data_s3/out/mendota_temps_long.csv.ind
+name: 1_all_raw_data/out/mendota_temps_long.csv.ind
 type: file
 hash: 8a8043e3d3a43cfb1910835bb4053c0b
-time: 2018-05-09 17:30:43 UTC
+time: 2018-05-09 17:58:10 UTC
 depends: {}
-fixed: f2d29ec6cdb6d5e9e8fbd7e4b30a616e
+fixed: 3dec601848af22b45ae448fc08492333
 code:
   functions:
     download_and_indicate: e8dec6e689cbbf4b4edc590899b4fd86
