@@ -12,8 +12,8 @@ sources:
 target_default: all_download
   
 targets:
-  all_download:
-    command: sc_indicate(I('1_public_data_download/public_data_download.ind'))
+  1_public_data_download/public_data_download.ind:
+    command: sc_indicate(target_name)
     depends:
     - 1_all_raw_data/out/long_term_ntl.csv.ind
     - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
