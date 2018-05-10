@@ -1,0 +1,41 @@
+packages:
+  - scipiper
+
+file_extensions:
+  - ind
+
+target_default: all_raw
+
+sources: 1_public_data_download/src/download_and_indicate.R
+
+targets:
+  all_raw:  
+    depends:
+    - 1_all_raw_data/out/long_term_ntl.csv.ind
+    - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
+    - 1_all_raw_data/out/mendota_temps_long.csv.ind
+    {{#targets}}
+    - 1_data_s3/in/{{.}}.ind
+    - 1_data_s3/in/{{.}}
+    {{/targets}}
+    
+  {{#targets}}
+  1_data_s3/out/{{.}}.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_data_s3/out/{{.}}:
+    command: gd_get('1_all_raw_data/in/{{.}}.ind')
+    
+  {{/targets}}
+  
+  1_all_raw_data/out/long_term_ntl.csv.ind:
+    command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/long_term_ntl.csv"), 
+             url = I("https://lter.limnology.wisc.edu/sites/default/files/data/ntl29_v5.csv"))
+             
+  1_all_raw_data/out/mendota_daily_buoy.csv.ind:
+    command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/mendota_daily_buoy.csv"),
+              url = I("https://lter.limnology.wisc.edu/sites/default/files/data/ntl130_1_v5.csv"))
+              
+  1_all_raw_data/out/mendota_temps_long.csv.ind:
+    command: download_and_indicate(remote_ind = target_name, local_file = I("1_public_data_download/out/mendota_temps_long.csv"),
+              url = I("https://lter.limnology.wisc.edu/sites/default/files/data/Lake_Mendota_temps_long.csv"))
+
