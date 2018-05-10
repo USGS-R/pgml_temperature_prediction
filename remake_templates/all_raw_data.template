@@ -20,9 +20,9 @@ targets:
     {{/targets}}
     
   {{#targets}}
-  1_all_raw_data/out/{{.}}.ind:
+  1_all_raw_data/in/{{.}}.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/out/{{.}}:
+  1_all_raw_data/in/{{.}}:
     command: gd_get('1_all_raw_data/in/{{.}}.ind')
     
   {{/targets}}

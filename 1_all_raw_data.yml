@@ -20,21 +20,35 @@ targets:
     - 1_all_raw_data/in/MPCA_temp_data_all.tsv
     - 1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb.ind
     - 1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb
+    - 1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx.ind
+    - 1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx
+    - 1_all_raw_data/in/Vermilion Logger 2014.csv.ind
+    - 1_all_raw_data/in/Vermilion Logger 2014.csv
     
-  1_all_raw_data/out/MN_fisheries_all_temp_data_Jan2018.txt.ind:
+  1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/out/MN_fisheries_all_temp_data_Jan2018.txt:
+  1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt:
     command: gd_get('1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind')
     
-  1_all_raw_data/out/MPCA_temp_data_all.tsv.ind:
+  1_all_raw_data/in/MPCA_temp_data_all.tsv.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/out/MPCA_temp_data_all.tsv:
+  1_all_raw_data/in/MPCA_temp_data_all.tsv:
     command: gd_get('1_all_raw_data/in/MPCA_temp_data_all.tsv.ind')
     
-  1_all_raw_data/out/URL_Temp_Logger_2006_to_2017.accdb.ind:
+  1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb.ind:
     command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/out/URL_Temp_Logger_2006_to_2017.accdb:
+  1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb:
     command: gd_get('1_all_raw_data/in/URL_Temp_Logger_2006_to_2017.accdb.ind')
+    
+  1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx:
+    command: gd_get('1_all_raw_data/in/vermillion_repeated_tempDO_longformat.xlsx.ind')
+    
+  1_all_raw_data/in/Vermilion Logger 2014.csv.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/Vermilion Logger 2014.csv:
+    command: gd_get('1_all_raw_data/in/Vermilion Logger 2014.csv.ind')
     
   
   1_all_raw_data/out/long_term_ntl.csv.ind:
