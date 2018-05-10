@@ -1,6 +1,7 @@
 packages:
   - scipiper
   - mda.lakes
+  - glmtools
 
 file_extensions:
   - ind

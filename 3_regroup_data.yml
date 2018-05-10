@@ -128,7 +128,7 @@ targets:
     command: s3_get('3_regroup_data/out/nhd_13293262.rds.ind')
       
   3_regroup_data/out/all_data.rds.ind:
-    command: aggregate_all_data(outind = target_name, '3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind','3_regroup_data/out/nhd_13293262.rds.ind')
+    command: aggregate_all_data(outind = target_name, '3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind') # removing Mendota,'3_regroup_data/out/nhd_13293262.rds.ind'
   3_regroup_data/out/all_data.rds:
     command: s3_get('3_regroup_data/out/all_data.rds.ind')
     

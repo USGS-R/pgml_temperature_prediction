@@ -1,0 +1,19 @@
+version: 0.3.0
+name: 3_regroup_data/out/all_data.rds.ind
+type: file
+hash: 3e10109880ebff2a2dabc9129fd80eff
+time: 2018-05-09 13:08:38 UTC
+depends:
+  3_regroup_data/out/nhd_120052238.rds.ind: 5db3548f58d68c282f8b7da6d538d3df
+  3_regroup_data/out/nhd_4817675.rds.ind: e23bd413961e000876ea2389ce5d2d65
+  3_regroup_data/out/nhd_120052195.rds.ind: 42f7196ae782cd3dcbea35282450e27d
+  3_regroup_data/out/nhd_2360642.rds.ind: 488ec024fcc7a1650a965d563e9f6578
+  3_regroup_data/out/nhd_120052233.rds.ind: e45483399614224e8b79052775004665
+  3_regroup_data/out/nhd_120052889.rds.ind: bad164adec16ef8dcb9a2adc39da1f56
+  3_regroup_data/out/nhd_7142570.rds.ind: 58658b9e6236950ec8d708e57bb65083
+  3_regroup_data/out/nhd_120052896.rds.ind: 440e13dda7a759cb1eaa89e4c0a09ec9
+fixed: 41c785a6f837a472cab01cc88b3aeb5c
+code:
+  functions:
+    aggregate_all_data: 6d642022eec0dc3dfb3de8e21e942f23
+
