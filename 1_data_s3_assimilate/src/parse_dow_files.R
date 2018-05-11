@@ -99,3 +99,48 @@ parse_ML_observed_temperatures <- function(inind, outind) {
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
+
+#rainy lake sand bay files
+parse_Sand_Bay_all_2013 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  all_data <- tibble()
+  nums <- 0:9
+  skip = 2
+  cols <- col_names = c("num", "time", "temp", paste0("V", 5:9))
+  #the files aren't all quite the same...
+  for(sheet in paste("Sand_Bay", nums, sep = "_")) {
+    raw_sheet <- readxl::read_excel(infile, sheet = sheet, skip = skip, 
+                                    col_names = cols)  
+    depth <- 10 - as.numeric(stringr::str_sub(sheet, -1,-1))
+    sheet_bind <- raw_sheet %>% select(time, temp) %>% mutate(Depth = depth)
+    all_data <- bind_rows(all_data, sheet_bind)
+  }
+  all_data_clean <- all_data %>% mutate(DateTime = as.Date(time), 
+                                        hrmin = substr(time, 12,16),
+                                        temp = fahrenheit_to_celsius(temp),
+                                        DOW = "69069400") %>% 
+    filter(grepl(pattern = "12:0", x = hrmin))
+  saveRDS(object = all_data_clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
+ parse_Sand_Bay_All_2016 <- parse_Sand_Bay_all_2015 <- parse_Sand_Bay_all_2014 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  sheet = "All"
+  if(grepl(pattern = "2016", x = infile)){
+    sheet = "Sand_Bay_All"
+  }
+  raw_sheet <- readxl::read_excel(infile, sheet = sheet) 
+  names(raw_sheet)[1] <- "DateTime"
+  clean_sheet <- raw_sheet %>% select(contains("Sand Bay"), contains("Date")) %>% 
+    tidyr::gather(key = Depth, value = "temp", -DateTime) %>% 
+    #0 sensor is at the bottom, 10 at top
+    mutate(Depth = 10 - as.numeric(stringr::str_sub(Depth, -1,-1))) %>% 
+    filter(lubridate::hour(DateTime) == 15) %>% 
+    mutate(DateTime = as.Date(DateTime), temp = fahrenheit_to_celsius(temp),
+           DOW = "69069400") 
+  saveRDS(object = clean_sheet, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
