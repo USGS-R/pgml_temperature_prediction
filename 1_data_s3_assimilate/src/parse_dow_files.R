@@ -51,22 +51,6 @@ parse_MN_fisheries_all_temp_data_Jan2018 <- function(inind, outind) {
   s3_put(remote_ind = outind, local_source = outfile)                        
 }
 
-#Takes 4 measurements a day at ~100,700,1300, 2000 hrs
-#taking the third measurement of each day, since closest to noon
-#Not sure what Vermillion DOW basin this comes from, but they all correspond 
-#to the same NHD lake, so just picking one 
-parse_Joes_Dock_2013 <- function(inind, outind) {
-  infile <- as_data_file(inind)
-  outfile <- as_data_file(outind)
-  raw_file <- data.table::fread(infile, skip = 1) %>% rename(temp = `Temp, °F (LGR S/N: 1109802, SEN S/N: 1109802)`) 
-  clean <- raw_file %>% mutate(temp = fahrenheit_to_celsius(temp),
-             DateTime = as.Date(`Date Time, GMT-05:00`, format = "%m/%d/%y"),
-             Depth = 0, DOW = '69037801') %>% filter(!is.na(temp)) %>% 
-    select(DateTime, Depth, temp, DOW)
-  downsampled <- clean %>% group_by(DateTime) %>% slice(3)
-  saveRDS(object = downsampled, file = outfile)
-  s3_put(remote_ind = outind, local_source = outfile)
-}
 
 #these take hourly measurements - keeping the noon measurements to
 #downsample to daily
@@ -88,31 +72,30 @@ parse_Cass_lake_emperature_Logger_Database_2008_to_present <- function(inind, ou
   s3_put(remote_ind = outind, local_source = outfile)
 }
 
-#same with picking an arbitrary Vermillion DOW
-parse_Joes_Dock_2012 <- function(inind, outind) {
+#Lake of the Woods
+parse_LotW_WQ_Gretchen_H <- function(inind, outind) {
   infile <- as_data_file(inind)
   outfile <- as_data_file(outind)
   raw <- readxl::read_excel(infile)
-  clean <- raw %>% mutate(temp = fahrenheit_to_celsius(Temp),
-                          Depth = 0, DOW = '69037801') %>% 
-    rename(DateTime = Date) %>% select(-Temp)
+  clean <- raw %>% filter(!grepl(pattern = "Dates in Red", x = notes) & !is.na(temp.units) & !is.na(temperature)) %>% 
+    mutate(DOW = gsub(pattern = "-", replacement = "", x = DOW),
+           depth = depth/3.28,
+           temp = ifelse(temp.units == "F", yes = fahrenheit_to_celsius(temperature),
+                         no = temperature)) %>% rename(Depth = depth, DateTime = Date) %>% 
+    select(DateTime, temp, Depth, DOW)
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
 
-#assuming this is the same instrument as the "open water" logger 
-#from 2/9/18 email
-parse_Lake_Vermilion_2016 <- function(inind, outind) {
+#mille lacs
+parse_ML_observed_temperatures <- function(inind, outind) {
   infile <- as_data_file(inind)
   outfile <- as_data_file(outind)
-  raw <- data.table::fread(infile, skip = 1) %>% rename(DateTime = `Date Time, GMT-06:00`,
-                                                        temp = "Temp, \xb0F (LGR S/N: 1161695, SEN S/N: 1161695)")
-  clean <- raw %>% mutate(time = stringr::str_sub(as.character(DateTime), -4, -1),
-                          temp = fahrenheit_to_celsius(temp),
-                          DateTime = as.Date(DateTime, format = "%m/%d/%Y"),
-                          Depth = 8/3.28, DOW = '69037801') %>% 
-    filter(time == "8:00") %>% select(DateTime, temp, Depth, DOW)
+  raw <- data.table::fread(infile)
+  clean <- raw %>% mutate(temp = fahrenheit_to_celsius(temp.f),
+                          Depth = depth.ft/3.28,
+                          DateTime = as.Date(Date, format = "%m/%d/%Y"),
+                          DOW = "48000200") %>% select(DateTime, temp, Depth, DOW)
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
-
