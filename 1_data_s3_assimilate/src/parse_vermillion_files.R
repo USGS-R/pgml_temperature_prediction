@@ -108,3 +108,73 @@ parse_Logger_Temps_2011_Open_Water <- function(inind, outind) {
   s3_put(remote_ind = outind, local_source = outfile)
 }
 
+#again keeping the afternoon measurements, assigning arbitrary Vermillion DOW
+parse_Open_Water_Logger_2013 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- data.table::fread(infile, skip = 1, col.names = c("num", "time",
+                                                           "temp", "temp_avg",
+                                                           paste0("V", 5:9)))
+  clean <- raw %>% mutate(DateTime = as.Date(time, format = "%m/%d/%y"),
+                          time = substr(time, 10,20),
+                          temp = fahrenheit_to_celsius(temp),
+                          Depth = 8/3.28, DOW = '69037801') %>% 
+    filter(time == "02:36:01 PM") %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
+parse_Temp_Logger_Data_2015 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- readxl::read_excel(infile, skip = 1) %>% rename(time = "Time, GMT-06:00",
+                                                         temp = "Temp, °F",
+                                                         avg_temp = "Avg: Temp, °F")
+  clean <- raw %>% filter(!is.na(temp)) %>% mutate(DateTime = as.Date(time, format = "%m/%d/%y"),
+                                                   time = substr(time, 12,20),
+                                                   temp = fahrenheit_to_celsius(temp),
+                                                   Depth = 8/3.28, DOW = '69037801') %>% group_by(DateTime) %>% 
+    filter(n() > 3 & time == "03:08:30") %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
+#again keeping the afternoon measurements, assigning arbitrary Vermillion DOW
+parse_Vermilion_Logger_2014 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- data.table::fread(infile, skip = 1, col.names = c("num", "time",
+                                                           "temp", "temp_avg",
+                                                           paste0("V", 5:9)))
+  clean <- raw %>% mutate(DateTime = as.Date(time, format = "%m/%d/%y"),
+                          time = substr(time, 10,20),
+                          temp = fahrenheit_to_celsius(temp),
+                          Depth = 8/3.28, DOW = '69037801') %>% filter(!is.na(temp)) %>% 
+    group_by(DateTime) %>% filter(n() > 3) %>% 
+    filter(time == "01:42:21 PM") %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
+parse_Verm_annual_tempDO_longformat <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- readxl::read_excel(infile)
+  #multiple profiles/day — keeping WQ1 since it is deepest
+  clean <- raw %>% mutate(DOW = '69037801') %>% filter(station == "WQ1") %>% 
+    rename(Depth = depth_m, DateTime = date) %>% 
+    select(DateTime, temp, Depth, DOW) 
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+#similar format as above
+parse_vermillion_repeated_tempDO_longformat <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- readxl::read_excel(infile)
+  #multiple profiles/day — keeping WQ1 since it is deepest
+  clean <- raw %>% mutate(DOW = '69037801') %>% filter(site == "wq1") %>% 
+    rename(Depth = depth, DateTime = datetext) %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
