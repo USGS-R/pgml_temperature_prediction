@@ -82,7 +82,7 @@ parse_LotW_WQ_Gretchen_H <- function(inind, outind) {
            depth = depth/3.28,
            temp = ifelse(temp.units == "F", yes = fahrenheit_to_celsius(temperature),
                          no = temperature)) %>% rename(Depth = depth, DateTime = Date) %>% 
-    select(DateTime, temp, Depth, DOW)
+    select(DateTime, temp, Depth, DOW) %>% mutate(DateTime = as.Date(DateTime))
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }

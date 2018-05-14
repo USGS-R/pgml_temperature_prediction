@@ -22,7 +22,8 @@ parse_Joes_Dock_Logger_2012 <- function(inind, outind) {
   raw <- readxl::read_excel(infile)
   clean <- raw %>% mutate(temp = fahrenheit_to_celsius(Temp),
                           Depth = 0, DOW = '69037801') %>% 
-    rename(DateTime = Date) %>% select(-Temp)
+    rename(DateTime = Date) %>% select(-Temp) %>% 
+    mutate(DateTime = as.Date(DateTime))
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
@@ -163,7 +164,7 @@ parse_Verm_annual_tempDO_longformat <- function(inind, outind) {
   #multiple profiles/day — keeping WQ1 since it is deepest
   clean <- raw %>% mutate(DOW = '69037801') %>% filter(station == "WQ1") %>% 
     rename(Depth = depth_m, DateTime = date) %>% 
-    select(DateTime, temp, Depth, DOW) 
+    select(DateTime, temp, Depth, DOW) %>% mutate(DateTime = as.Date(DateTime))
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
@@ -174,7 +175,8 @@ parse_vermillion_repeated_tempDO_longformat <- function(inind, outind) {
   raw <- readxl::read_excel(infile)
   #multiple profiles/day — keeping WQ1 since it is deepest
   clean <- raw %>% mutate(DOW = '69037801') %>% filter(site == "wq1") %>% 
-    rename(Depth = depth, DateTime = datetext) %>% select(DateTime, temp, Depth, DOW)
+    rename(Depth = depth, DateTime = datetext) %>% select(DateTime, temp, Depth, DOW) %>% 
+    mutate(DateTime = as.Date(DateTime))
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
