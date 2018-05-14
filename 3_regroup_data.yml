@@ -23,7 +23,6 @@ include:
 
 targets:
   observation_summaries:
-    command: sc_indicate(I('3_regroup_data/regroup_data.ind'))
     depends:
     - 3_regroup_data/out/data_summary_plots.pdf
     - 3_regroup_data/out/data_summary_table.csv
@@ -32,7 +31,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_120052238"), state_src = I("DOW"), 
              state_id = I(c('69084500')), wqp_file = '1_data_wqp/out/nhd_120052238.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_120052238.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -43,7 +42,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_4817675"), state_src = I("DOW"), 
              state_id = I(c('11020300','11020301')), wqp_file = '1_data_wqp/out/nhd_4817675.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_4817675.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -54,7 +53,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_120052195"), state_src = I("DOW"), 
              state_id = I(c('39000200')), wqp_file = '1_data_wqp/out/nhd_120052195.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_120052195.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -65,7 +64,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_2360642"), state_src = I("DOW"), 
              state_id = I(c('48000200')), wqp_file = '1_data_wqp/out/nhd_2360642.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_2360642.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -76,7 +75,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_120052233"), state_src = I("DOW"), 
              state_id = I(c('69069400')), wqp_file = '1_data_wqp/out/nhd_120052233.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_120052233.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -87,7 +86,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_120052889"), state_src = I("DOW"), 
              state_id = I(c('04003501')), wqp_file = '1_data_wqp/out/nhd_120052889.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_120052889.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -98,7 +97,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_7142570"), state_src = I("DOW"), 
              state_id = I(c('69037800','69037801','69037802')), wqp_file = '1_data_wqp/out/nhd_7142570.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_7142570.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -109,7 +108,7 @@ targets:
     command: regroup_data(nhd_id = I("nhd_120052896"), state_src = I("DOW"), 
              state_id = I(c('11014700')), wqp_file = '1_data_wqp/out/nhd_120052896.rds.ind',
              nml = "2_get_model_files/nml/glm2_nhd_120052896.nml",
-             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     depends: 
       - lib/crosswalks/rawfile_to_id_crosswalk.csv
       - lib/cfg/base_model_config.yml
@@ -127,8 +126,19 @@ targets:
   3_regroup_data/out/nhd_13293262.rds:
     command: s3_get('3_regroup_data/out/nhd_13293262.rds.ind')
       
+  3_regroup_data/out/nhd_167122137.rds.ind:
+    command: regroup_data(nhd_id = I("nhd_167122137"), state_src = I("DOW"), 
+             state_id = I(c('04003000')), wqp_file = '1_data_wqp/out/nhd_167122137.rds.ind',
+             nml = "2_get_model_files/nml/glm2_nhd_167122137.nml",
+             '1_data_s3_assimilate/out/MN_fisheries_all_temp_data_Jan2018.rds.ind','1_data_s3_assimilate/out/MPCA_temp_data_all.rds.ind','1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind','1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind','1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind','1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind','1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind','1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind','1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind','1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind','1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind','1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind','1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind','1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind','1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
+    depends: 
+      - lib/crosswalks/rawfile_to_id_crosswalk.csv
+      - lib/cfg/base_model_config.yml
+  3_regroup_data/out/nhd_167122137.rds:
+    command: s3_get('3_regroup_data/out/nhd_167122137.rds.ind')
+      
   3_regroup_data/out/all_data.rds.ind:
-    command: aggregate_all_data(outind = target_name, '3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind','3_regroup_data/out/nhd_13293262.rds.ind')
+    command: aggregate_all_data(outind = target_name, '3_regroup_data/out/nhd_120052238.rds.ind','3_regroup_data/out/nhd_4817675.rds.ind','3_regroup_data/out/nhd_120052195.rds.ind','3_regroup_data/out/nhd_2360642.rds.ind','3_regroup_data/out/nhd_120052233.rds.ind','3_regroup_data/out/nhd_120052889.rds.ind','3_regroup_data/out/nhd_7142570.rds.ind','3_regroup_data/out/nhd_120052896.rds.ind','3_regroup_data/out/nhd_13293262.rds.ind','3_regroup_data/out/nhd_167122137.rds.ind')
   3_regroup_data/out/all_data.rds:
     command: s3_get('3_regroup_data/out/all_data.rds.ind')
     

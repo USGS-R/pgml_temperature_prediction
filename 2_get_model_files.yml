@@ -1,6 +1,7 @@
 packages:
   - scipiper
   - mda.lakes
+  - glmtools
 
 file_extensions:
   - ind
@@ -41,6 +42,9 @@ targets:
     - 2_get_model_files/meteo/nhd_13293262_driver.csv.ind
     - 2_get_model_files/meteo/nhd_13293262_driver.csv
     - 2_get_model_files/nml/glm2_nhd_13293262.nml
+    - 2_get_model_files/meteo/nhd_167122137_driver.csv.ind
+    - 2_get_model_files/meteo/nhd_167122137_driver.csv
+    - 2_get_model_files/nml/glm2_nhd_167122137.nml
     
   2_get_model_files/meteo/nhd_120052238_driver.csv.ind:
     command: get_post_driver_file(outind = target_name, nhd = I('nhd_120052238'))
@@ -104,4 +108,11 @@ targets:
     command: s3_get('2_get_model_files/meteo/nhd_13293262_driver.csv.ind')
   2_get_model_files/nml/glm2_nhd_13293262.nml:
     command: get_lake_base_nml(nhd = I('nhd_13293262'), glm_out = I("2_get_model_files/nml/glm2_nhd_13293262.nml"))
+  
+  2_get_model_files/meteo/nhd_167122137_driver.csv.ind:
+    command: get_post_driver_file(outind = target_name, nhd = I('nhd_167122137'))
+  2_get_model_files/meteo/nhd_167122137_driver.csv:
+    command: s3_get('2_get_model_files/meteo/nhd_167122137_driver.csv.ind')
+  2_get_model_files/nml/glm2_nhd_167122137.nml:
+    command: get_lake_base_nml(nhd = I('nhd_167122137'), glm_out = I("2_get_model_files/nml/glm2_nhd_167122137.nml"))
   
