@@ -13,7 +13,6 @@ sources:
 
 targets:
   all_get_model_files:
-    command: sc_indicate(I('2_get_model_files/get_model_files.ind'))
     depends:
     {{#nhd}}
     - 2_get_model_files/meteo/{{.}}_driver.csv.ind
