@@ -18,6 +18,7 @@ targets:
     depends:
     - 1_data_wqp/out/nhd_120052238.rds.ind
     - 1_data_wqp/out/nhd_4817675.rds.ind
+    - 1_data_wqp/out/nhd_4819397.rds.ind
     - 1_data_wqp/out/nhd_120052195.rds.ind
     - 1_data_wqp/out/nhd_2360642.rds.ind
     - 1_data_wqp/out/nhd_120052233.rds.ind
@@ -43,6 +44,15 @@ targets:
     - lib/cfg/wqp_config.yml
   1_data_wqp/out/nhd_4817675.rds:
     command: s3_get('1_data_wqp/out/nhd_4817675.rds.ind')
+    
+
+  1_data_wqp/out/nhd_4819397.rds.ind:
+    command: wqp_lookup_retrieve(outind = target_name, nhd = I("nhd_4819397"))
+    depends: 
+    - lib/crosswalks/lakes_master.csv
+    - lib/cfg/wqp_config.yml
+  1_data_wqp/out/nhd_4819397.rds:
+    command: s3_get('1_data_wqp/out/nhd_4819397.rds.ind')
     
 
   1_data_wqp/out/nhd_120052195.rds.ind:
