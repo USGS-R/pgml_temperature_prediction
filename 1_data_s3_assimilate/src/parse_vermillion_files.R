@@ -16,7 +16,7 @@ parse_Joes_Dock_2013 <- function(inind, outind) {
 }
 
 #same with picking an arbitrary Vermillion DOW
-parse_Joes_Dock_2012 <- function(inind, outind) {
+parse_Joes_Dock_Logger_2012 <- function(inind, outind) {
   infile <- as_data_file(inind)
   outfile <- as_data_file(outind)
   raw <- readxl::read_excel(infile)

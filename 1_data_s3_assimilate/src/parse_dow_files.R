@@ -107,7 +107,7 @@ parse_Sand_Bay_all_2013 <- function(inind, outind) {
   all_data <- tibble()
   nums <- 0:9
   skip = 2
-  cols <- col_names = c("num", "time", "temp", paste0("V", 5:9))
+  cols <- c("num", "time", "temp", paste0("V", 5:9))
   #the files aren't all quite the same...
   for(sheet in paste("Sand_Bay", nums, sep = "_")) {
     raw_sheet <- readxl::read_excel(infile, sheet = sheet, skip = skip, 
