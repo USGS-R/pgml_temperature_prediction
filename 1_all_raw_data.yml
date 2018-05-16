@@ -58,6 +58,8 @@ targets:
     - 1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx
     - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind
     - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb
+    - 1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind
+    - 1_all_raw_data/in/Leech_logger_temps_06_16.xls
     
   1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -153,6 +155,21 @@ targets:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Lake_Vermilion_2016.csv:
     command: gd_get('1_all_raw_data/in/Lake_Vermilion_2016.csv.ind')
+    
+  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv:
+    command: gd_get('1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind')
+    
+  1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/Leech_Main_Basin_11020301.csv:
+    command: gd_get('1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind')
+    
+  1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/Leech_logger_temps_06_16.xls:
+    command: gd_get('1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind')
     
   1_all_raw_data/in/Joes_Dock_2013.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)

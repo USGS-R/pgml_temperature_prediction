@@ -100,6 +100,19 @@ parse_ML_observed_temperatures <- function(inind, outind) {
   s3_put(remote_ind = outind, local_source = outfile)
 }
 
+parse_Leech_logger <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- readxl::read_excel(infile)
+  
+  clean <- raw %>% mutate(temp = fahrenheit_to_celsius(`Main lake 16 ft`),
+                          Depth = 16/3.28,
+                          DateTime = as.Date(Date, format = "%Y-%m-%d"),
+                          DOW = "11020301") %>% select(Date, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
 #rainy lake sand bay files
 parse_Sand_Bay_all_2013 <- function(inind, outind) {
   infile <- as_data_file(inind)
