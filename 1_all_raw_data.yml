@@ -6,14 +6,14 @@ file_extensions:
 
 target_default: all_raw
 
-sources: 1_public_data_download/src/download_and_indicate.R
+sources: 1_all_raw_data/src/download_and_indicate.R
 
 targets:
   all_raw:  
     depends:
-    - 1_all_raw_data/out/long_term_ntl.csv.ind
-    - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
-    - 1_all_raw_data/out/mendota_temps_long.csv.ind
+    #- 1_all_raw_data/out/long_term_ntl.csv.ind
+    #- 1_all_raw_data/out/mendota_daily_buoy.csv.ind
+    #- 1_all_raw_data/out/mendota_temps_long.csv.ind
     - 1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind
     - 1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt
     - 1_all_raw_data/in/MPCA_temp_data_all.tsv.ind

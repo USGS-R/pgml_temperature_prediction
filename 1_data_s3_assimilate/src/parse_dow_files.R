@@ -82,7 +82,7 @@ parse_LotW_WQ_Gretchen_H <- function(inind, outind) {
            depth = depth/3.28,
            temp = ifelse(temp.units == "F", yes = fahrenheit_to_celsius(temperature),
                          no = temperature)) %>% rename(Depth = depth, DateTime = Date) %>% 
-    select(DateTime, temp, Depth, DOW)
+    select(DateTime, temp, Depth, DOW) %>% mutate(DateTime = as.Date(DateTime))
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
@@ -107,7 +107,7 @@ parse_Sand_Bay_all_2013 <- function(inind, outind) {
   all_data <- tibble()
   nums <- 0:9
   skip = 2
-  cols <- col_names = c("num", "time", "temp", paste0("V", 5:9))
+  cols <- c("num", "time", "temp", paste0("V", 5:9))
   #the files aren't all quite the same...
   for(sheet in paste("Sand_Bay", nums, sep = "_")) {
     raw_sheet <- readxl::read_excel(infile, sheet = sheet, skip = skip, 
