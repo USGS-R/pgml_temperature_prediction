@@ -23,7 +23,6 @@ include:
 
 targets:
   observation_summaries:
-    command: sc_indicate(I('3_regroup_data/regroup_data.ind'))
     depends:
     - 3_regroup_data/out/data_summary_plots.pdf
     - 3_regroup_data/out/data_summary_table.csv

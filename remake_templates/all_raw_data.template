@@ -6,7 +6,7 @@ file_extensions:
 
 target_default: all_raw
 
-sources: 1_public_data_download/src/download_and_indicate.R
+sources: 1_all_raw_data/src/download_and_indicate.R
 
 targets:
   all_raw:  
