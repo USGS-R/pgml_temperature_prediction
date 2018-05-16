@@ -28,8 +28,6 @@ targets:
     - 1_all_raw_data/in/Verm_annual_tempDO_longformat.xlsx
     - 1_all_raw_data/in/Temp_Logger_Data_2015.xlsx.ind
     - 1_all_raw_data/in/Temp_Logger_Data_2015.xlsx
-    - 1_all_raw_data/in/Sand_Bay_All_2017.xlsx.ind
-    - 1_all_raw_data/in/Sand_Bay_All_2017.xlsx
     - 1_all_raw_data/in/Sand_Bay_All_2016.xlsx.ind
     - 1_all_raw_data/in/Sand_Bay_All_2016.xlsx
     - 1_all_raw_data/in/Sand_Bay_all_2015.xlsx.ind
@@ -52,10 +50,6 @@ targets:
     - 1_all_raw_data/in/Logger_Temps_2009_Open_Water.csv
     - 1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv.ind
     - 1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv
-    - 1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind
-    - 1_all_raw_data/in/Leech_Main_Basin_11020301.csv
-    - 1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind
-    - 1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv
     - 1_all_raw_data/in/Lake_Vermilion_2016.csv.ind
     - 1_all_raw_data/in/Lake_Vermilion_2016.csv
     - 1_all_raw_data/in/Joes_Dock_2013.csv.ind
@@ -99,11 +93,6 @@ targets:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Temp_Logger_Data_2015.xlsx:
     command: gd_get('1_all_raw_data/in/Temp_Logger_Data_2015.xlsx.ind')
-    
-  1_all_raw_data/in/Sand_Bay_All_2017.xlsx.ind:
-    command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Sand_Bay_All_2017.xlsx:
-    command: gd_get('1_all_raw_data/in/Sand_Bay_All_2017.xlsx.ind')
     
   1_all_raw_data/in/Sand_Bay_All_2016.xlsx.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -159,16 +148,6 @@ targets:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv:
     command: gd_get('1_all_raw_data/in/Logger_Temps_2009_Joes_Dock.csv.ind')
-    
-  1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind:
-    command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Leech_Main_Basin_11020301.csv:
-    command: gd_get('1_all_raw_data/in/Leech_Main_Basin_11020301.csv.ind')
-    
-  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind:
-    command: gd_confirm_posted(ind_file = target_name)
-  1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv:
-    command: gd_get('1_all_raw_data/in/Leech_Kabekona_Bay_11020302.csv.ind')
     
   1_all_raw_data/in/Lake_Vermilion_2016.csv.ind:
     command: gd_confirm_posted(ind_file = target_name)

@@ -30,6 +30,44 @@ targets:
     - 1_data_s3_assimilate/out/MPCA_temp_data_all.rds
     - 1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind
     - 1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds
+    - 1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind
+    - 1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds
+    - 1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind
+    - 1_data_s3_assimilate/out/Vermilion_Logger_2014.rds
+    - 1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind
+    - 1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds
+    - 1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind
+    - 1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds
+    - 1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind
+    - 1_data_s3_assimilate/out/Sand_Bay_All_2016.rds
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2015.rds
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2014.rds
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind
+    - 1_data_s3_assimilate/out/Sand_Bay_all_2013.rds
+    - 1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind
+    - 1_data_s3_assimilate/out/Open_Water_Logger_2013.rds
+    - 1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind
+    - 1_data_s3_assimilate/out/ML_observed_temperatures.rds
+    - 1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind
+    - 1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds
+    - 1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind
+    - 1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds
+    - 1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind
+    - 1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds
+    - 1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind
+    - 1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds
+    - 1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind
+    - 1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds
+    - 1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind
+    - 1_data_s3_assimilate/out/Lake_Vermilion_2016.rds
+    - 1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind
+    - 1_data_s3_assimilate/out/Joes_Dock_2013.rds
+    - 1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind
+    - 1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds
+    - 1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind
+    - 1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds
   
   1_data_s3_assimilate/out/long_term_ntl.rds.ind:
     command: parse_long_term_ntl(outind=target_name, 
@@ -66,4 +104,118 @@ targets:
                                 inind = '1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind')
   1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds:
     command: s3_get('1_data_s3_assimilate/out/URL_Temp_Logger_2006_to_2017.rds.ind')
+    
+  1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind:
+    command: parse_vermillion_repeated_tempDO_longformat(outind=target_name, 
+                                inind = '1_data_s3/out/vermillion_repeated_tempDO_longformat.xlsx.ind')
+  1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds:
+    command: s3_get('1_data_s3_assimilate/out/vermillion_repeated_tempDO_longformat.rds.ind')
+    
+  1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind:
+    command: parse_Vermilion_Logger_2014(outind=target_name, 
+                                inind = '1_data_s3/out/Vermilion_Logger_2014.csv.ind')
+  1_data_s3_assimilate/out/Vermilion_Logger_2014.rds:
+    command: s3_get('1_data_s3_assimilate/out/Vermilion_Logger_2014.rds.ind')
+    
+  1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind:
+    command: parse_Verm_annual_tempDO_longformat(outind=target_name, 
+                                inind = '1_data_s3/out/Verm_annual_tempDO_longformat.xlsx.ind')
+  1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds:
+    command: s3_get('1_data_s3_assimilate/out/Verm_annual_tempDO_longformat.rds.ind')
+    
+  1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind:
+    command: parse_Temp_Logger_Data_2015(outind=target_name, 
+                                inind = '1_data_s3/out/Temp_Logger_Data_2015.xlsx.ind')
+  1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds:
+    command: s3_get('1_data_s3_assimilate/out/Temp_Logger_Data_2015.rds.ind')
+    
+  1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind:
+    command: parse_Sand_Bay_All_2016(outind=target_name, 
+                                inind = '1_data_s3/out/Sand_Bay_All_2016.xlsx.ind')
+  1_data_s3_assimilate/out/Sand_Bay_All_2016.rds:
+    command: s3_get('1_data_s3_assimilate/out/Sand_Bay_All_2016.rds.ind')
+    
+  1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind:
+    command: parse_Sand_Bay_all_2015(outind=target_name, 
+                                inind = '1_data_s3/out/Sand_Bay_all_2015.xlsx.ind')
+  1_data_s3_assimilate/out/Sand_Bay_all_2015.rds:
+    command: s3_get('1_data_s3_assimilate/out/Sand_Bay_all_2015.rds.ind')
+    
+  1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind:
+    command: parse_Sand_Bay_all_2014(outind=target_name, 
+                                inind = '1_data_s3/out/Sand_Bay_all_2014.xlsx.ind')
+  1_data_s3_assimilate/out/Sand_Bay_all_2014.rds:
+    command: s3_get('1_data_s3_assimilate/out/Sand_Bay_all_2014.rds.ind')
+    
+  1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind:
+    command: parse_Sand_Bay_all_2013(outind=target_name, 
+                                inind = '1_data_s3/out/Sand_Bay_all_2013.xlsx.ind')
+  1_data_s3_assimilate/out/Sand_Bay_all_2013.rds:
+    command: s3_get('1_data_s3_assimilate/out/Sand_Bay_all_2013.rds.ind')
+    
+  1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind:
+    command: parse_Open_Water_Logger_2013(outind=target_name, 
+                                inind = '1_data_s3/out/Open_Water_Logger_2013.csv.ind')
+  1_data_s3_assimilate/out/Open_Water_Logger_2013.rds:
+    command: s3_get('1_data_s3_assimilate/out/Open_Water_Logger_2013.rds.ind')
+    
+  1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind:
+    command: parse_ML_observed_temperatures(outind=target_name, 
+                                inind = '1_data_s3/out/ML_observed_temperatures.txt.ind')
+  1_data_s3_assimilate/out/ML_observed_temperatures.rds:
+    command: s3_get('1_data_s3_assimilate/out/ML_observed_temperatures.rds.ind')
+    
+  1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind:
+    command: parse_LotW_WQ_Gretchen_H(outind=target_name, 
+                                inind = '1_data_s3/out/LotW_WQ_Gretchen_H.xlsx.ind')
+  1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds:
+    command: s3_get('1_data_s3_assimilate/out/LotW_WQ_Gretchen_H.rds.ind')
+    
+  1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind:
+    command: parse_Logger_Temps_2011_Open_Water(outind=target_name, 
+                                inind = '1_data_s3/out/Logger_Temps_2011_Open_Water.xlsx.ind')
+  1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds:
+    command: s3_get('1_data_s3_assimilate/out/Logger_Temps_2011_Open_Water.rds.ind')
+    
+  1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind:
+    command: parse_Logger_Temps_2010_Open_Water(outind=target_name, 
+                                inind = '1_data_s3/out/Logger_Temps_2010_Open_Water.csv.ind')
+  1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds:
+    command: s3_get('1_data_s3_assimilate/out/Logger_Temps_2010_Open_Water.rds.ind')
+    
+  1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind:
+    command: parse_Logger_Temps_2009_Open_Water(outind=target_name, 
+                                inind = '1_data_s3/out/Logger_Temps_2009_Open_Water.csv.ind')
+  1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds:
+    command: s3_get('1_data_s3_assimilate/out/Logger_Temps_2009_Open_Water.rds.ind')
+    
+  1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind:
+    command: parse_Logger_Temps_2009_Joes_Dock(outind=target_name, 
+                                inind = '1_data_s3/out/Logger_Temps_2009_Joes_Dock.csv.ind')
+  1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds:
+    command: s3_get('1_data_s3_assimilate/out/Logger_Temps_2009_Joes_Dock.rds.ind')
+    
+  1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind:
+    command: parse_Lake_Vermilion_2016(outind=target_name, 
+                                inind = '1_data_s3/out/Lake_Vermilion_2016.csv.ind')
+  1_data_s3_assimilate/out/Lake_Vermilion_2016.rds:
+    command: s3_get('1_data_s3_assimilate/out/Lake_Vermilion_2016.rds.ind')
+    
+  1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind:
+    command: parse_Joes_Dock_2013(outind=target_name, 
+                                inind = '1_data_s3/out/Joes_Dock_2013.csv.ind')
+  1_data_s3_assimilate/out/Joes_Dock_2013.rds:
+    command: s3_get('1_data_s3_assimilate/out/Joes_Dock_2013.rds.ind')
+    
+  1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind:
+    command: parse_Joes_Dock_Logger_2012(outind=target_name, 
+                                inind = '1_data_s3/out/Joes_Dock_Logger_2012.xlsx.ind')
+  1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds:
+    command: s3_get('1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds.ind')
+    
+  1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind:
+    command: parse_Cass_lake_emperature_Logger_Database_2008_to_present(outind=target_name, 
+                                inind = '1_data_s3/out/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind')
+  1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds:
+    command: s3_get('1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
     
