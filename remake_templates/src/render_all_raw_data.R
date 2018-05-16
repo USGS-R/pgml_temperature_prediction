@@ -1,5 +1,5 @@
-render_s3 <- function(){
-  template <- readLines('remake_templates/s3.template')
+render_all_raw_data <- function(yml_file){
+  template <- readLines('remake_templates/all_raw_data.template')
   lakes <- read.csv('lib/crosswalks/rawfile_to_id_crosswalk.csv', 
                     stringsAsFactors = FALSE) %>% 
           filter(id != "UWID")
@@ -7,7 +7,7 @@ render_s3 <- function(){
   
   targets <- list(targets=targets)
   out <- whisker.render(template = template, data = targets)
-  cat(out, file = '1_data_s3.yml')
+  cat(out, file = yml_file)
 }
 
 render_s3_assimilate <- function(){

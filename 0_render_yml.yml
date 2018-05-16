@@ -1,0 +1,53 @@
+packages:
+  - scipiper
+  - whisker
+  - assertthat
+  - dplyr
+  - tools
+  
+sources: #mustache templates for the step remake files
+  - remake_templates/src/render_all_raw_data.R
+  - remake_templates/src/render_wqp.R
+  - remake_templates/src/render_get_model_files.R
+  - remake_templates/src/render_regroup.R
+
+target_default: render_all
+  
+targets:
+  render_all:
+    depends:
+    - 1_all_raw_data.yml
+    - 1_data_s3_assimilate.yml
+    - 1_data_wqp.yml
+    - 2_get_model_files.yml
+    - 3_regroup_data.yml
+    
+  1_all_raw_data.yml:
+    command: render_all_raw_data(target_name)
+    depends: 
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/all_raw_data.template
+ 
+  1_data_s3_assimilate.yml:
+    command: render_s3_assimilate()
+    depends:
+    - lib/crosswalks/rawfile_to_id_crosswalk.csv
+    - remake_templates/s3_assimilate.template
+    
+  1_data_wqp.yml:
+    command: render_wqp()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/wqp.template
+    
+  2_get_model_files.yml:
+    command: render_setup_models()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/get_model_files.template
+    
+  3_regroup_data.yml:
+    command: render_regroup()
+    depends:
+    - lib/crosswalks/lakes_master.csv
+    - remake_templates/regroup.template
