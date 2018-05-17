@@ -1,5 +1,6 @@
 packages:
   - scipiper
+  - tidyr
 
 file_extensions:
   - ind
