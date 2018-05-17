@@ -17,3 +17,4 @@ pest/pMaster_*
 .httr-oauth
 *.DS_Store
 *.remake
+.Rproj.user
