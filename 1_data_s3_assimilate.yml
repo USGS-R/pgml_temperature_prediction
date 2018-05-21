@@ -68,6 +68,8 @@ targets:
     - 1_data_s3_assimilate/out/Joes_Dock_Logger_2012.rds
     - 1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind
     - 1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds
+    - 1_data_s3_assimilate/out/Leech_logger_temps_06_16.rds.ind
+    - 1_data_s3_assimilate/out/Leech_logger_temps_06_16.rds
   
   1_data_s3_assimilate/out/long_term_ntl.rds.ind:
     command: parse_long_term_ntl(outind=target_name, 
@@ -218,4 +220,10 @@ targets:
                                 inind = '1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind')
   1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds:
     command: s3_get('1_data_s3_assimilate/out/Cass_lake_emperature_Logger_Database_2008_to_present.rds.ind')
+    
+  1_data_s3_assimilate/out/Leech_logger_temps_06_16.rds.ind:
+    command: parse_Leech_logger_temps_06_16(outind=target_name, 
+                                inind = '1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind')
+  1_data_s3_assimilate/out/Leech_logger_temps_06_16.rds:
+    command: s3_get('1_data_s3_assimilate/out/Leech_logger_temps_06_16.rds.ind')
     

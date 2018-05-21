@@ -144,3 +144,18 @@ parse_Sand_Bay_all_2013 <- function(inind, outind) {
   saveRDS(object = clean_sheet, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }
+
+parse_Leech_logger_temps_06_16 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  raw <- readxl::read_excel(infile)
+  #based on MPCA file, this is the main lake DOW, and 11020302  
+  clean_sheet <- raw %>% tidyr::gather(key = "site", value = "temp_f", -Date) %>% 
+    mutate(DOW = "11020301", Depth = recode(site, "Main lake 16 ft" = 16/3.28,
+                                                  "Walker Bay 15 feet" = 15/3.28,
+                                                  "Walker Bay 6 feet" = 6/3.28),
+           temp = fahrenheit_to_celsius(temp_f), DateTime = as.Date(Date)) %>% 
+    filter(!is.na(temp)) %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean_sheet, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
