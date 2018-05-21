@@ -58,6 +58,8 @@ targets:
     - 1_all_raw_data/in/Joes_Dock_Logger_2012.xlsx
     - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind
     - 1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb
+    - 1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind
+    - 1_all_raw_data/in/Leech_logger_temps_06_16.xls
     
   1_all_raw_data/in/MN_fisheries_all_temp_data_Jan2018.txt.ind:
     command: gd_confirm_posted(ind_file = target_name)
@@ -168,6 +170,11 @@ targets:
     command: gd_confirm_posted(ind_file = target_name)
   1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb:
     command: gd_get('1_all_raw_data/in/Cass_lake_emperature_Logger_Database_2008_to_present.accdb.ind')
+    
+  1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind:
+    command: gd_confirm_posted(ind_file = target_name)
+  1_all_raw_data/in/Leech_logger_temps_06_16.xls:
+    command: gd_get('1_all_raw_data/in/Leech_logger_temps_06_16.xls.ind')
     
   
   1_all_raw_data/out/long_term_ntl.csv.ind:
