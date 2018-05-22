@@ -114,7 +114,7 @@ parse_Leech_logger_temps_06_16 <- function(inind, outind) {
   clean <- raw %>% rename(ft_16 = `Main lake 16 ft`, ft_15 = `Walker Bay 15 feet`, ft_6 = `Walker Bay 6 feet`) %>% 
     gather(key = depth_char,value = temp_F, ft_16, ft_15, ft_6) %>% 
     mutate(temp = fahrenheit_to_celsius(temp_F),
-           Depth = depth_char_to_num(depth_char),
+           Depth = depth_char_to_num(depth_char)/3.28,
            DateTime = as.Date(Date, format = "%Y-%m-%d"),
            DOW = "11020301") %>% select(Date, temp, Depth, DOW)
   saveRDS(object = clean, file = outfile)
