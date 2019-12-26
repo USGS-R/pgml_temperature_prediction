@@ -4,10 +4,11 @@ parse_MPCA_temp_data_all <- function(inind, outind) {
   outfile <- as_data_file(outind)
   raw_file <- data.table::fread(infile, colClasses = c(DOW="character"),
                                 select = c("SAMPLE_DATE", "START_DEPTH", "DEPTH_UNIT",
-                                           "RESULT_NUMERIC", "RESULT_UNIT", "DOW"))
+                                           "RESULT_NUMERIC", "RESULT_UNIT", "DOW", "SAMPLETIME"))
   assert_that(unique(raw_file$RESULT_UNIT) == "deg C")
   #some measurements missing depth unit
-  clean <- raw_file %>% filter(DEPTH_UNIT == "m") %>% select(-RESULT_UNIT, -DEPTH_UNIT) %>% 
+  message('warning, we are skipping SAMPLETIME???')
+  clean <- raw_file %>% filter(DEPTH_UNIT == "m") %>% select(-RESULT_UNIT, -DEPTH_UNIT, -SAMPLETIME) %>% 
     mutate(SAMPLE_DATE = as.Date(SAMPLE_DATE, format = "%m/%d/%Y")) %>% 
     rename(DateTime = SAMPLE_DATE, Depth = START_DEPTH, temp = RESULT_NUMERIC)
   saveRDS(object = clean, file = outfile)
@@ -96,6 +97,26 @@ parse_ML_observed_temperatures <- function(inind, outind) {
                           Depth = depth.ft/3.28,
                           DateTime = as.Date(Date, format = "%m/%d/%Y"),
                           DOW = "48000200") %>% select(DateTime, temp, Depth, DOW)
+  saveRDS(object = clean, file = outfile)
+  s3_put(remote_ind = outind, local_source = outfile)
+}
+
+
+parse_Leech_logger_temps_06_16 <- function(inind, outind) {
+  infile <- as_data_file(inind)
+  outfile <- as_data_file(outind)
+  
+  depth_char_to_num <- function(x){
+    sapply(x, FUN = function(x) strsplit(x,'[_]')[[1]][2] %>% as.numeric(), USE.NAMES = FALSE)
+  }
+  
+  raw <- readxl::read_excel(infile, col_types = c("date", "numeric","numeric","numeric"))
+  clean <- raw %>% rename(ft_16 = `Main lake 16 ft`, ft_15 = `Walker Bay 15 feet`, ft_6 = `Walker Bay 6 feet`) %>% 
+    gather(key = depth_char,value = temp_F, ft_16, ft_15, ft_6) %>% 
+    mutate(temp = fahrenheit_to_celsius(temp_F),
+           Depth = depth_char_to_num(depth_char)/3.28,
+           DateTime = as.Date(Date, format = "%Y-%m-%d"),
+           DOW = "11020301") %>% select(Date, temp, Depth, DOW)
   saveRDS(object = clean, file = outfile)
   s3_put(remote_ind = outind, local_source = outfile)
 }

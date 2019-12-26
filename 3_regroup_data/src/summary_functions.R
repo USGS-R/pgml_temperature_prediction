@@ -29,7 +29,7 @@ data_summary_plots <- function(inind, outfile, remake_file) {
   depth_plot <- ggplot(all_data, aes(x = DateTime, y = Depth)) +
     geom_point(size = 0.7) + scale_y_reverse() +
     facet_wrap( ~ facet_label, ncol=2)
-  ggsave(filename = outfile, plot = depth_plot, width = 12, height = 8)
+  ggsave(filename = outfile, plot = depth_plot, width = 18, height = 6, dpi = 450)
 }
 
 data_summary_csv <- function(inind, outfile, remake_file) {

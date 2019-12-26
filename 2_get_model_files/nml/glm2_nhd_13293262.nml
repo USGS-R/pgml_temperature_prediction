@@ -32,7 +32,7 @@
 &output
    out_dir = '.'
    out_fn = 'output'
-   nsave = 24
+   nsave = 1
    csv_lake_fname = 'lake'
    csv_point_nlevs = 0
    csv_point_fname = 'WQ_'

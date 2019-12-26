@@ -11,9 +11,6 @@ sources: 1_all_raw_data/src/download_and_indicate.R
 targets:
   all_raw:  
     depends:
-    - 1_all_raw_data/out/long_term_ntl.csv.ind
-    - 1_all_raw_data/out/mendota_daily_buoy.csv.ind
-    - 1_all_raw_data/out/mendota_temps_long.csv.ind
     {{#targets}}
     - 1_all_raw_data/in/{{.}}.ind
     - 1_all_raw_data/in/{{.}}

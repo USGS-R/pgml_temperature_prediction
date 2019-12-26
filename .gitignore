@@ -1,6 +1,5 @@
 rlogs/*
 shellLog/*
-.Rproj.user
 .Rhistory
 .RData
 .Ruserdata
@@ -18,3 +17,4 @@ pest/pMaster_*
 .httr-oauth
 *.DS_Store
 *.remake
+.Rproj.user

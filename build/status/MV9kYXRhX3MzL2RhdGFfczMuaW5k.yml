@@ -1,0 +1,17 @@
+version: 0.3.0
+name: 1_data_s3/data_s3.ind
+type: file
+hash: 6d09101e9f5dcab2293802dc79ab929c
+time: 2018-05-10 12:52:30 UTC
+depends:
+  lib/cfg/s3_config.yml: ccc5ec4776885028ab43b082010690bb
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt.ind: 9ebc8995aca5d8392faa6f214e568406
+  1_data_s3/out/MN_fisheries_all_temp_data_Jan2018.txt: d9d8aece9be3d3722591250d1bca2c0e
+  1_data_s3/out/MPCA_temp_data_all.tsv.ind: fbc3605e6b452ba19db798be6da13c2a
+  1_data_s3/out/MPCA_temp_data_all.tsv: 56a540b821c1c2966b8276036f33c457
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb.ind: 07b5817846e434d0180cc429f2c91a5f
+  1_data_s3/out/URL_Temp_Logger_2006_to_2017.accdb: 8c1fe0e2c109dfa8ea1eb17d780427d6
+fixed: dd4aa393a3bf9a1bd97e5c007491c8fc
+code:
+  functions: {}
+
